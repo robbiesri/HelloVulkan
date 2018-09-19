@@ -6,6 +6,25 @@
 /*
 To create:
 
+buffer memory
+VkDeviceMemory_185
+VkDeviceMemory_963
+VkDeviceMemory_13619
+VkDeviceMemory_4228
+
+image memory
+VkDeviceMemory_8977521
+VkDeviceMemory_9414592
+VkDeviceMemory_7793
+VkDeviceMemory_9331068
+VkDeviceMemory_9291315
+VkDeviceMemory_21191
+VkDeviceMemory_21183
+VkDeviceMemory_21187 
+VkDeviceMemory_8976432
+VkDeviceMemory_18858
+VkDeviceMemory_10831813
+
 VkBuffer_1136;
 VkBuffer_1091;
 VkBuffer_19003;
@@ -14,6 +33,16 @@ VkBuffer_10838418;
 VkBuffer_1373;
 VkBuffer_4271;
 VkBuffer_4275;
+
+VkBuffer_1096
+VkBuffer_1358
+VkBuffer_4256
+VkBuffer_4281
+
+VkBufferView_1098;
+VkBufferView_1360;
+VkBufferView_4258
+VkBufferView_4283;
 
 VkSampler_1174;
 VkSampler_18590;
@@ -25,11 +54,42 @@ VkSampler_1177;
 VkSampler_1051
 VkSampler_6244
 
+VkImage_9013537
+VkImage_9434269
+VkImage_9013954
+VkImage_10929
+VkImage_9331134
+VkImage_9331137
+VkImage_9331096
+VkImage_9331099
+VkImage_9331090
+VkImage_1453
+VkImage_34748
+VkImage_21182
+VkImage_21186
+VkImage_21190
+VkImage_21194
+VkImage_18801
+VkImage_21197
+VkImage_972
+VkImage_987
+VkImage_984
+VkImage_10882643
+VkImage_10894040
+VkImage_10882657
+VkImage_10832257
+VkImage_19025
+VkImage_1017
+VkImage_1026
+VkImage_1441
+VkImage_10831998
+VkImage_18649
+
 VkImageView_9013541;
 VkImageView_9434270;
 VkImageView_9013956;
 VkImageView_10931;
-\VkImageView_9331135;
+VkImageView_9331135;
 VkImageView_9331138;
 VkImageView_9331097;
 VkImageView_9331100;
@@ -56,16 +116,9 @@ VkImageView_1442
 VkImageView_10832000
 VkImageView_18651
 
-VkBufferView_1098;
-VkBufferView_1360;
-VkBufferView_4258
-VkBufferView_4283;
-
 shader module
 graphics pipeline
 bind pipeline layout to graphics pipeline
-buffers
-images
 
 Created:
 
@@ -89,13 +142,13 @@ VkDescriptorPool_1137
 ************************
 To update:
 
+Updated:
+
 VkDescriptorSet_15840359
 VkDescriptorSet_15840362
 VkDescriptorSet_1254
 VkDescriptorSet_15840552
 VkDescriptorSet_15840555
-
-Updated:
 
 */
 
@@ -3057,5 +3110,35 @@ void InjectionContainer::UpdateDescriptorSets()
         //vkUpdateDescriptorSets(VkDevice_5, 14, pDescriptorWrites, 0, pDescriptorCopies);
         vkUpdateDescriptorSets(m_device, 14, pDescriptorWrites, 0, pDescriptorCopies);
     }
+
+}
+
+void InjectionContainer::AllocateMemory()
+{
+
+}
+
+void InjectionContainer::CreateBuffers()
+{
+
+}
+
+void InjectionContainer::CreateBufferViews()
+{
+
+}
+
+void InjectionContainer::CreateImages()
+{
+
+}
+
+void InjectionContainer::CreateImageViews()
+{
+
+}
+
+void InjectionContainer::CreateSamplers()
+{
 
 }

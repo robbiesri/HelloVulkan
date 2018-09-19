@@ -28,6 +28,25 @@ private:
 
     VkPipelineLayout VkPipelineLayout_1231;
 
+    // buffer memory
+    VkDeviceMemory VkDeviceMemory_185;
+    VkDeviceMemory VkDeviceMemory_963;
+    VkDeviceMemory VkDeviceMemory_13619;
+    VkDeviceMemory VkDeviceMemory_4228;
+
+    // image memory
+    VkDeviceMemory VkDeviceMemory_8977521;
+    VkDeviceMemory VkDeviceMemory_9414592;
+    VkDeviceMemory VkDeviceMemory_7793;
+    VkDeviceMemory VkDeviceMemory_9331068;
+    VkDeviceMemory VkDeviceMemory_9291315;
+    VkDeviceMemory VkDeviceMemory_21191;
+    VkDeviceMemory VkDeviceMemory_21183;
+    VkDeviceMemory VkDeviceMemory_21187;
+    VkDeviceMemory VkDeviceMemory_8976432;
+    VkDeviceMemory VkDeviceMemory_18858;
+    VkDeviceMemory VkDeviceMemory_10831813;
+
     VkBuffer VkBuffer_1136;
     VkBuffer VkBuffer_1091;
     VkBuffer VkBuffer_19003;
@@ -36,6 +55,15 @@ private:
     VkBuffer VkBuffer_1373;
     VkBuffer VkBuffer_4271;
     VkBuffer VkBuffer_4275;
+    VkBuffer VkBuffer_1096;
+    VkBuffer VkBuffer_1358;
+    VkBuffer VkBuffer_4256;
+    VkBuffer VkBuffer_4281;
+
+    VkBufferView VkBufferView_1098;
+    VkBufferView VkBufferView_1360;
+    VkBufferView VkBufferView_4258;
+    VkBufferView VkBufferView_4283;
 
     VkSampler VkSampler_1174;
     VkSampler VkSampler_18590;
@@ -46,6 +74,37 @@ private:
     VkSampler VkSampler_1177;
     VkSampler VkSampler_1051;
     VkSampler VkSampler_6244;
+
+    VkImage VkImage_9013537;
+    VkImage VkImage_9434269;
+    VkImage VkImage_9013954;
+    VkImage VkImage_10929;
+    VkImage VkImage_9331134;
+    VkImage VkImage_9331137;
+    VkImage VkImage_9331096;
+    VkImage VkImage_9331099;
+    VkImage VkImage_9331090;
+    VkImage VkImage_1453;
+    VkImage VkImage_34748;
+    VkImage VkImage_21182;
+    VkImage VkImage_21186;
+    VkImage VkImage_21190;
+    VkImage VkImage_21194;
+    VkImage VkImage_18801;
+    VkImage VkImage_21197;
+    VkImage VkImage_972;
+    VkImage VkImage_987;
+    VkImage VkImage_984;
+    VkImage VkImage_10882643;
+    VkImage VkImage_10894040;
+    VkImage VkImage_10882657;
+    VkImage VkImage_10832257;
+    VkImage VkImage_19025;
+    VkImage VkImage_1017;
+    VkImage VkImage_1026;
+    VkImage VkImage_1441;
+    VkImage VkImage_10831998;
+    VkImage VkImage_18649;
 
     VkImageView VkImageView_9013541;
     VkImageView VkImageView_9434270;
@@ -78,10 +137,7 @@ private:
     VkImageView VkImageView_10832000;
     VkImageView VkImageView_18651;
 
-    VkBufferView VkBufferView_1098;
-    VkBufferView VkBufferView_1360;
-    VkBufferView VkBufferView_4258;
-    VkBufferView VkBufferView_4283;
+
 
     void CreateDescriptorSetLayouts();
     void CreatePipelineLayouts();
@@ -89,6 +145,14 @@ private:
     void AllocateDescriptorSets();
 
     void UpdateDescriptorSets();
+
+    void AllocateMemory();
+    void CreateBuffers();
+    void CreateBufferViews();
+    void CreateImages();
+    void CreateImageViews();
+    void CreateSamplers();
+
 
 };
 
