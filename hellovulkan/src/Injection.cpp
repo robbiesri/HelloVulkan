@@ -6,6 +6,34 @@
 /*
 To create:
 
+VkBuffer_1136;
+VkBuffer_1091;
+
+VkSampler_1174;
+VkSampler_18590;
+VkSampler_18587;
+VkSampler_18586;
+VkSampler_1179;
+VkSampler_1176;
+
+VkImageView_9013541;
+VkImageView_9434270;
+VkImageView_9013956;
+VkImageView_10931;
+\VkImageView_9331135;
+VkImageView_9331138;
+VkImageView_9331097;
+VkImageView_9331100;
+VkImageView_9331091;
+VkImageView_1454;
+VkImageView_34751;
+VkImageView_21184;
+VkImageView_21188;
+VkImageView_21192;
+VkImageView_21195;
+
+VkBufferView_1098;
+
 shader module
 graphics pipeline
 bind pipeline layout to graphics pipeline
@@ -1733,4 +1761,919 @@ void InjectionContainer::AllocateDescriptorSets()
 
 void InjectionContainer::UpdateDescriptorSets()
 {
+    // VkDescriptorSet_15840359
+    {
+        VkDescriptorBufferInfo pBufferInfo_0[1] = {
+            { /* pBufferInfo = */
+                /* buffer = */ VkBuffer_1136,
+                /* offset = */ 12637424u,
+                /* range = */ 8336u,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_0 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 0u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
+            /* pImageInfo = */ NULL,
+            /* pBufferInfo = */ pBufferInfo_0,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_1[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ VkSampler_1174,
+                /* imageView = */ NULL,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_1 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 1u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLER,
+            /* pImageInfo = */ pImageInfo_1,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_2[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ VkSampler_18590,
+                /* imageView = */ NULL,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_2 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 2u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLER,
+            /* pImageInfo = */ pImageInfo_2,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_3[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ VkSampler_18587,
+                /* imageView = */ NULL,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_3 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 3u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLER,
+            /* pImageInfo = */ pImageInfo_3,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_4[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ VkSampler_18586,
+                /* imageView = */ NULL,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_4 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 4u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLER,
+            /* pImageInfo = */ pImageInfo_4,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_5[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ VkSampler_1179,
+                /* imageView = */ NULL,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_5 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 5u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLER,
+            /* pImageInfo = */ pImageInfo_5,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_6[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ VkSampler_1176,
+                /* imageView = */ NULL,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_6 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 6u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLER,
+            /* pImageInfo = */ pImageInfo_6,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_7[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_9013541,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_7 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 7u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_7,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_8[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_9434270,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_8 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 8u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_8,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_9[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_9434270,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_9 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 9u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_9,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_10[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_9013956,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_10 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 10u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_10,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_11[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_10931,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_11 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 11u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_11,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_12[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_9331135,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_12 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 12u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_12,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_13[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_9331138,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_13 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 13u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_13,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_14[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_9331097,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_14 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 14u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_14,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_15[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_9331100,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_15 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 15u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_15,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_16[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_9331091,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_16 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 16u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_16,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_17[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_1454,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_17 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 17u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_17,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_18[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_34751,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_18 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 18u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_18,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_19[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_21184,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_19 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 19u,
+            /* dstArrayElement = */ 0u,
+/* descriptorCount = */ 1u,
+/* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+/* pImageInfo = */ pImageInfo_19,
+/* pBufferInfo = */ NULL,
+/* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_20[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_21188,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_20 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 20u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_20,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_21[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_21192,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_21 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 21u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_21,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_22[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_21195,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_22 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 22u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_22,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkBufferView pTexelBufferView_23[1] = {
+            /* pTexelBufferView = */ VkBufferView_1098,
+        };
+        VkWriteDescriptorSet pDescriptorWrites_23 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 23u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER,
+            /* pImageInfo = */ NULL,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ pTexelBufferView_23,
+        };
+        VkDescriptorBufferInfo pBufferInfo_24[1] = {
+            { /* pBufferInfo = */
+                /* buffer = */ VkBuffer_1091,
+                /* offset = */ 0u,
+                /* range = */ 18446744073709551615u,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_24 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840359,
+            /* dstBinding = */ 24u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            /* pImageInfo = */ NULL,
+            /* pBufferInfo = */ pBufferInfo_24,
+            /* pTexelBufferView = */ NULL,
+        };
+    }
+
+    // VkDescriptorSet_15840362
+    {
+        VkDescriptorBufferInfo pBufferInfo_25[1] = {
+            { /* pBufferInfo = */
+                /* buffer = */ VkBuffer_1136,
+                /* offset = */ 12677904u,
+                /* range = */ 1632u,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_25 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 0u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
+            /* pImageInfo = */ NULL,
+            /* pBufferInfo = */ pBufferInfo_25,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_26[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ VkSampler_1177,
+                /* imageView = */ NULL,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_26 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 1u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLER,
+            /* pImageInfo = */ pImageInfo_26,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_27[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ VkSampler_1051,
+                /* imageView = */ NULL,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_27 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 2u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLER,
+            /* pImageInfo = */ pImageInfo_27,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_28[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ VkSampler_6244,
+                /* imageView = */ NULL,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_28 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 3u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLER,
+            /* pImageInfo = */ pImageInfo_28,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_29[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_18802,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_29 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 4u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_29,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_30[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_21199,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_30 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 5u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_30,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_31[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_973,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_31 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 6u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_31,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_32[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_973,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_32 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 7u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_32,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_33[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_988,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_33 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 27u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_33,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_34[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_985,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_34 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 28u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_34,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_35[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_10882645,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_35 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 29u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_35,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_36[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_10894042,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_36 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 30u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_36,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_37[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_10882658,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_37 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 31u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_37,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_38[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_10832259,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_38 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 32u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_38,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_39[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_19027,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_39 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 36u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_39,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_40[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_1018,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_40 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 40u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_40,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_41[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_1018,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_41 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 41u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_41,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_42[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_1018,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_42 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 42u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_42,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_43[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_1027,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_43 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 43u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_43,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_44[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_1027,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_44 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 44u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_44,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_45[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_1442,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_45 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 45u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_45,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_46[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_10832000,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_46 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 46u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_46,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorBufferInfo pBufferInfo_47[1] = {
+            { /* pBufferInfo = */
+                /* buffer = */ VkBuffer_19003,
+                /* offset = */ 0u,
+                /* range = */ 18446744073709551615u,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_47 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840362,
+            /* dstBinding = */ 53u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            /* pImageInfo = */ NULL,
+            /* pBufferInfo = */ pBufferInfo_47,
+            /* pTexelBufferView = */ NULL,
+        };
+    }
 }

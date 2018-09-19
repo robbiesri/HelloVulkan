@@ -28,6 +28,34 @@ private:
 
     VkPipelineLayout VkPipelineLayout_1231;
 
+    VkBuffer VkBuffer_1136;
+    VkBuffer VkBuffer_1091;
+
+    VkSampler VkSampler_1174;
+    VkSampler VkSampler_18590;
+    VkSampler VkSampler_18587;
+    VkSampler VkSampler_18586;
+    VkSampler VkSampler_1179;
+    VkSampler VkSampler_1176;
+
+    VkImageView VkImageView_9013541;
+    VkImageView VkImageView_9434270;
+    VkImageView VkImageView_9013956;
+    VkImageView VkImageView_10931;
+    VkImageView VkImageView_9331135;
+    VkImageView VkImageView_9331138;
+    VkImageView VkImageView_9331097;
+    VkImageView VkImageView_9331100;
+    VkImageView VkImageView_9331091;
+    VkImageView VkImageView_1454;
+    VkImageView VkImageView_34751;
+    VkImageView VkImageView_21184;
+    VkImageView VkImageView_21188;
+    VkImageView VkImageView_21192;
+    VkImageView VkImageView_21195;
+
+    VkBufferView VkBufferView_1098;
+
     void CreateDescriptorSetLayouts();
     void CreatePipelineLayouts();
     void CreateDescriptorPools();
