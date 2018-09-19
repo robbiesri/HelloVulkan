@@ -8,6 +8,13 @@ To create:
 
 VkBuffer_1136;
 VkBuffer_1091;
+VkBuffer_19003;
+VkBuffer_1136;
+VkBuffer_8981352;
+VkBuffer_10838418;
+VkBuffer_1373;
+VkBuffer_4271;
+VkBuffer_4275;
 
 VkSampler_1174;
 VkSampler_18590;
@@ -15,6 +22,9 @@ VkSampler_18587;
 VkSampler_18586;
 VkSampler_1179;
 VkSampler_1176;
+VkSampler_1177;
+VkSampler_1051
+VkSampler_6244
 
 VkImageView_9013541;
 VkImageView_9434270;
@@ -31,8 +41,26 @@ VkImageView_21184;
 VkImageView_21188;
 VkImageView_21192;
 VkImageView_21195;
+VkImageView_18802
+VkImageView_21199
+VkImageView_973
+VkImageView_988
+VkImageView_985
+VkImageView_10882645
+VkImageView_10894042
+VkImageView_10882658
+VkImageView_10832259
+VkImageView_19027
+VkImageView_1018
+VkImageView_1027
+VkImageView_1442
+VkImageView_10832000
+VkImageView_18651
 
 VkBufferView_1098;
+VkBufferView_1360;
+VkBufferView_4258
+VkBufferView_4283;
 
 shader module
 graphics pipeline
@@ -2578,7 +2606,7 @@ void InjectionContainer::UpdateDescriptorSets()
             /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
             /* pImageInfo = */ pImageInfo_42,
             /* pBufferInfo = */ NULL,
-            /* pTexelBufferView = */ NULL,
+/* pTexelBufferView = */ NULL,
         };
         VkDescriptorImageInfo pImageInfo_43[1] = {
             { /* pImageInfo = */
@@ -2676,4 +2704,273 @@ void InjectionContainer::UpdateDescriptorSets()
             /* pTexelBufferView = */ NULL,
         };
     }
+
+    //VkDescriptorSet_1254 - no writes? no use?
+    {
+
+    }
+
+    //VkDescriptorSet_15840552
+    {
+        VkDescriptorBufferInfo pBufferInfo_0[1] = {
+            { /* pBufferInfo = */
+                /* buffer = */ VkBuffer_1136,
+                /* offset = */ 12679536u,
+                /* range = */ 320u,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_0 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840552,
+            /* dstBinding = */ 0u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
+            /* pImageInfo = */ NULL,
+            /* pBufferInfo = */ pBufferInfo_0,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkBufferView pTexelBufferView_1[1] = {
+            /* pTexelBufferView = */ VkBufferView_1360,
+        };
+        VkWriteDescriptorSet pDescriptorWrites_1 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840552,
+            /* dstBinding = */ 3u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER,
+            /* pImageInfo = */ NULL,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ pTexelBufferView_1,
+        };
+        VkDescriptorBufferInfo pBufferInfo_2[1] = {
+            { /* pBufferInfo = */
+                /* buffer = */ VkBuffer_1136,
+                /* offset = */ 12679856u,
+                /* range = */ 304u,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_2 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840552,
+            /* dstBinding = */ 1u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
+            /* pImageInfo = */ NULL,
+            /* pBufferInfo = */ pBufferInfo_2,
+            /* pTexelBufferView = */ NULL,
+        };
+    }
+    
+    
+    //VkDescriptorSet_15840555
+    {
+        VkDescriptorBufferInfo pBufferInfo_3[1] = {
+            { /* pBufferInfo = */
+                /* buffer = */ VkBuffer_1136,
+                /* offset = */ 12765088u,
+                /* range = */ 16u,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_3 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840555,
+            /* dstBinding = */ 1u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
+            /* pImageInfo = */ NULL,
+            /* pBufferInfo = */ pBufferInfo_3,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorImageInfo pImageInfo_4[1] = {
+            { /* pImageInfo = */
+                /* sampler = */ NULL,
+                /* imageView = */ VkImageView_18651,
+                /* imageLayout = */ VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_4 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840555,
+            /* dstBinding = */ 24u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_4,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkBufferView pTexelBufferView_5[1] = {
+            /* pTexelBufferView = */ VkBufferView_4258,
+        };
+        VkWriteDescriptorSet pDescriptorWrites_5 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840555,
+            /* dstBinding = */ 69u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER,
+            /* pImageInfo = */ NULL,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ pTexelBufferView_5,
+        };
+        VkBufferView pTexelBufferView_6[1] = {
+            /* pTexelBufferView = */ VkBufferView_4283,
+        };
+        VkWriteDescriptorSet pDescriptorWrites_6 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840555,
+            /* dstBinding = */ 70u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER,
+            /* pImageInfo = */ NULL,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ pTexelBufferView_6,
+        };
+        VkDescriptorBufferInfo pBufferInfo_7[1] = {
+            { /* pBufferInfo = */
+                /* buffer = */ VkBuffer_8981352,
+                /* offset = */ 0u,
+                /* range = */ 18446744073709551615u,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_7 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840555,
+            /* dstBinding = */ 79u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            /* pImageInfo = */ NULL,
+            /* pBufferInfo = */ pBufferInfo_7,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorBufferInfo pBufferInfo_8[1] = {
+            { /* pBufferInfo = */
+                /* buffer = */ VkBuffer_10838418,
+                /* offset = */ 0u,
+                /* range = */ 18446744073709551615u,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_8 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840555,
+            /* dstBinding = */ 80u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            /* pImageInfo = */ NULL,
+            /* pBufferInfo = */ pBufferInfo_8,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorBufferInfo pBufferInfo_9[1] = {
+            { /* pBufferInfo = */
+                /* buffer = */ VkBuffer_1373,
+                /* offset = */ 0u,
+                /* range = */ 18446744073709551615u,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_9 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840555,
+            /* dstBinding = */ 81u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            /* pImageInfo = */ NULL,
+            /* pBufferInfo = */ pBufferInfo_9,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorBufferInfo pBufferInfo_10[1] = {
+            { /* pBufferInfo = */
+                /* buffer = */ VkBuffer_4271,
+                /* offset = */ 0u,
+                /* range = */ 18446744073709551615u,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_10 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840555,
+            /* dstBinding = */ 86u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            /* pImageInfo = */ NULL,
+            /* pBufferInfo = */ pBufferInfo_10,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorBufferInfo pBufferInfo_11[1] = {
+            { /* pBufferInfo = */
+                /* buffer = */ VkBuffer_4275,
+                /* offset = */ 0u,
+                /* range = */ 18446744073709551615u,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_11 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840555,
+            /* dstBinding = */ 87u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            /* pImageInfo = */ NULL,
+            /* pBufferInfo = */ pBufferInfo_11,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorBufferInfo pBufferInfo_12[1] = {
+            { /* pBufferInfo = */
+                /* buffer = */ VkBuffer_1136,
+                /* offset = */ 12677600u,
+                /* range = */ 288u,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_12 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840555,
+            /* dstBinding = */ 2u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
+            /* pImageInfo = */ NULL,
+            /* pBufferInfo = */ pBufferInfo_12,
+            /* pTexelBufferView = */ NULL,
+        };
+        VkDescriptorBufferInfo pBufferInfo_13[1] = {
+            { /* pBufferInfo = */
+                /* buffer = */ VkBuffer_1136,
+                /* offset = */ 12676976u,
+                /* range = */ 624u,
+            },
+        };
+        VkWriteDescriptorSet pDescriptorWrites_13 = {
+            /* sType = */ VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            /* pNext = */ NULL,
+            /* dstSet = */ VkDescriptorSet_15840555,
+            /* dstBinding = */ 3u,
+            /* dstArrayElement = */ 0u,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
+            /* pImageInfo = */ NULL,
+            /* pBufferInfo = */ pBufferInfo_13,
+            /* pTexelBufferView = */ NULL,
+        };
+    }
+
 }
