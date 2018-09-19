@@ -100,6 +100,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\src\ImageIO.h" />
+    <ClInclude Include="..\src\Injection.h" />
     <ClInclude Include="..\src\RubyTexture.h" />
     <ClInclude Include="..\src\Shaders.h" />
     <ClInclude Include="..\src\Utility.h" />
@@ -110,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\ImageIO.cpp" />
+    <ClCompile Include="..\src\Injection.cpp" />
     <ClCompile Include="..\src\Main.cpp" />
     <ClCompile Include="..\src\Utility.cpp" />
     <ClCompile Include="..\src\VulkanQuad.cpp" />

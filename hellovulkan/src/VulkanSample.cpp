@@ -203,9 +203,9 @@ VkInstance CreateInstance()
     };
 
 #ifdef _DEBUG
-    auto debugInstanceExtensionNames = GetDebugInstanceExtensionNames();
-    instanceExtensions.insert(instanceExtensions.end(),
-        debugInstanceExtensionNames.begin(), debugInstanceExtensionNames.end());
+    //auto debugInstanceExtensionNames = GetDebugInstanceExtensionNames();
+    //instanceExtensions.insert(instanceExtensions.end(),
+    //    debugInstanceExtensionNames.begin(), debugInstanceExtensionNames.end());
 #endif
 
     instanceCreateInfo.ppEnabledExtensionNames = instanceExtensions.data();
@@ -214,9 +214,9 @@ VkInstance CreateInstance()
     std::vector<const char*> instanceLayers;
 
 #ifdef _DEBUG
-    auto debugInstanceLayerNames = GetDebugInstanceLayerNames();
-    instanceLayers.insert(instanceLayers.end(),
-        debugInstanceLayerNames.begin(), debugInstanceLayerNames.end());
+    //auto debugInstanceLayerNames = GetDebugInstanceLayerNames();
+    //instanceLayers.insert(instanceLayers.end(),
+    //    debugInstanceLayerNames.begin(), debugInstanceLayerNames.end());
 #endif
 
     instanceCreateInfo.ppEnabledLayerNames = instanceLayers.data();
