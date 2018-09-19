@@ -31,8 +31,6 @@ private:
     VkBuffer VkBuffer_1136;
     VkBuffer VkBuffer_1091;
     VkBuffer VkBuffer_19003;
-    VkBuffer VkBuffer_19003;
-    VkBuffer VkBuffer_1136;
     VkBuffer VkBuffer_8981352;
     VkBuffer VkBuffer_10838418;
     VkBuffer VkBuffer_1373;

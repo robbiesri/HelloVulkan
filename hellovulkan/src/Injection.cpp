@@ -9,7 +9,6 @@ To create:
 VkBuffer_1136;
 VkBuffer_1091;
 VkBuffer_19003;
-VkBuffer_1136;
 VkBuffer_8981352;
 VkBuffer_10838418;
 VkBuffer_1373;
@@ -109,14 +108,14 @@ void InjectionContainer::CreateResources(VkDevice device)
 
     CreateDescriptorPools();
     AllocateDescriptorSets();
+
+    // update descriptor sets
+    // only need to do this once!
+    UpdateDescriptorSets();
 }
 
 void InjectionContainer::BuildCommandBuffer(VkCommandBuffer commandBuffer)
 {
-    // update descriptor sets
-    // TODO: possibly move these into CreateResources?
-    UpdateDescriptorSets();
-
     // bind descriptor sets
     //vkCmdBindDescriptorSets(VkCommandBuffer_360, VK_PIPELINE_BIND_POINT_COMPUTE, VkPipelineLayout_1231, 0u, 1u, pDescriptorSets, 0u, pDynamicOffsets);
     VkDescriptorSet pDescriptorSets[5] = {
@@ -1789,8 +1788,10 @@ void InjectionContainer::AllocateDescriptorSets()
 
 void InjectionContainer::UpdateDescriptorSets()
 {
-    // VkDescriptorSet_15840359
+    // VkDescriptorSet_15840359 + VkDescriptorSet_15840362
     {
+        // VkDescriptorSet_15840359 - 25 writes
+
         VkDescriptorBufferInfo pBufferInfo_0[1] = {
             { /* pBufferInfo = */
                 /* buffer = */ VkBuffer_1136,
@@ -2165,11 +2166,11 @@ void InjectionContainer::UpdateDescriptorSets()
             /* dstSet = */ VkDescriptorSet_15840359,
             /* dstBinding = */ 19u,
             /* dstArrayElement = */ 0u,
-/* descriptorCount = */ 1u,
-/* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
-/* pImageInfo = */ pImageInfo_19,
-/* pBufferInfo = */ NULL,
-/* pTexelBufferView = */ NULL,
+            /* descriptorCount = */ 1u,
+            /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            /* pImageInfo = */ pImageInfo_19,
+            /* pBufferInfo = */ NULL,
+            /* pTexelBufferView = */ NULL,
         };
         VkDescriptorImageInfo pImageInfo_20[1] = {
             { /* pImageInfo = */
@@ -2262,10 +2263,9 @@ void InjectionContainer::UpdateDescriptorSets()
             /* pBufferInfo = */ pBufferInfo_24,
             /* pTexelBufferView = */ NULL,
         };
-    }
 
-    // VkDescriptorSet_15840362
-    {
+        // VkDescriptorSet_15840362 - 23 writes
+
         VkDescriptorBufferInfo pBufferInfo_25[1] = {
             { /* pBufferInfo = */
                 /* buffer = */ VkBuffer_1136,
@@ -2606,7 +2606,7 @@ void InjectionContainer::UpdateDescriptorSets()
             /* descriptorType = */ VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
             /* pImageInfo = */ pImageInfo_42,
             /* pBufferInfo = */ NULL,
-/* pTexelBufferView = */ NULL,
+            /* pTexelBufferView = */ NULL,
         };
         VkDescriptorImageInfo pImageInfo_43[1] = {
             { /* pImageInfo = */
@@ -2703,6 +2703,69 @@ void InjectionContainer::UpdateDescriptorSets()
             /* pBufferInfo = */ pBufferInfo_47,
             /* pTexelBufferView = */ NULL,
         };
+
+        //VkWriteDescriptorSet pDescriptorWrites[56] = {
+        VkWriteDescriptorSet pDescriptorWrites[48] = {
+            /* pDescriptorWrites = */ pDescriptorWrites_0,
+            /* pDescriptorWrites = */ pDescriptorWrites_1,
+            /* pDescriptorWrites = */ pDescriptorWrites_2,
+            /* pDescriptorWrites = */ pDescriptorWrites_3,
+            /* pDescriptorWrites = */ pDescriptorWrites_4,
+            /* pDescriptorWrites = */ pDescriptorWrites_5,
+            /* pDescriptorWrites = */ pDescriptorWrites_6,
+            /* pDescriptorWrites = */ pDescriptorWrites_7,
+            /* pDescriptorWrites = */ pDescriptorWrites_8,
+            /* pDescriptorWrites = */ pDescriptorWrites_9,
+            /* pDescriptorWrites = */ pDescriptorWrites_10,
+            /* pDescriptorWrites = */ pDescriptorWrites_11,
+            /* pDescriptorWrites = */ pDescriptorWrites_12,
+            /* pDescriptorWrites = */ pDescriptorWrites_13,
+            /* pDescriptorWrites = */ pDescriptorWrites_14,
+            /* pDescriptorWrites = */ pDescriptorWrites_15,
+            /* pDescriptorWrites = */ pDescriptorWrites_16,
+            /* pDescriptorWrites = */ pDescriptorWrites_17,
+            /* pDescriptorWrites = */ pDescriptorWrites_18,
+            /* pDescriptorWrites = */ pDescriptorWrites_19,
+            /* pDescriptorWrites = */ pDescriptorWrites_20,
+            /* pDescriptorWrites = */ pDescriptorWrites_21,
+            /* pDescriptorWrites = */ pDescriptorWrites_22,
+            /* pDescriptorWrites = */ pDescriptorWrites_23,
+            /* pDescriptorWrites = */ pDescriptorWrites_24,
+            /* pDescriptorWrites = */ pDescriptorWrites_25,
+            /* pDescriptorWrites = */ pDescriptorWrites_26,
+            /* pDescriptorWrites = */ pDescriptorWrites_27,
+            /* pDescriptorWrites = */ pDescriptorWrites_28,
+            /* pDescriptorWrites = */ pDescriptorWrites_29,
+            /* pDescriptorWrites = */ pDescriptorWrites_30,
+            /* pDescriptorWrites = */ pDescriptorWrites_31,
+            /* pDescriptorWrites = */ pDescriptorWrites_32,
+            /* pDescriptorWrites = */ pDescriptorWrites_33,
+            /* pDescriptorWrites = */ pDescriptorWrites_34,
+            /* pDescriptorWrites = */ pDescriptorWrites_35,
+            /* pDescriptorWrites = */ pDescriptorWrites_36,
+            /* pDescriptorWrites = */ pDescriptorWrites_37,
+            /* pDescriptorWrites = */ pDescriptorWrites_38,
+            /* pDescriptorWrites = */ pDescriptorWrites_39,
+            /* pDescriptorWrites = */ pDescriptorWrites_40,
+            /* pDescriptorWrites = */ pDescriptorWrites_41,
+            /* pDescriptorWrites = */ pDescriptorWrites_42,
+            /* pDescriptorWrites = */ pDescriptorWrites_43,
+            /* pDescriptorWrites = */ pDescriptorWrites_44,
+            /* pDescriptorWrites = */ pDescriptorWrites_45,
+            /* pDescriptorWrites = */ pDescriptorWrites_46,
+            /* pDescriptorWrites = */ pDescriptorWrites_47,
+            ///* pDescriptorWrites = */ pDescriptorWrites_48,
+            ///* pDescriptorWrites = */ pDescriptorWrites_49,
+            ///* pDescriptorWrites = */ pDescriptorWrites_50,
+            ///* pDescriptorWrites = */ pDescriptorWrites_51,
+            ///* pDescriptorWrites = */ pDescriptorWrites_52,
+            ///* pDescriptorWrites = */ pDescriptorWrites_53,
+            ///* pDescriptorWrites = */ pDescriptorWrites_54,
+            ///* pDescriptorWrites = */ pDescriptorWrites_55,
+        };
+        VkCopyDescriptorSet* pDescriptorCopies = NULL;
+        //vkUpdateDescriptorSets(VkDevice_5, 56, pDescriptorWrites, 0, pDescriptorCopies);
+        vkUpdateDescriptorSets(m_device, 48, pDescriptorWrites, 0, pDescriptorCopies);
     }
 
     //VkDescriptorSet_1254 - no writes? no use?
@@ -2710,8 +2773,11 @@ void InjectionContainer::UpdateDescriptorSets()
 
     }
 
-    //VkDescriptorSet_15840552
+    // VkDescriptorSet_15840552 + VkDescriptorSet_15840555
+    // could split these into two writes...
     {
+        // VkDescriptorSet_15840552 - 3 writes
+
         VkDescriptorBufferInfo pBufferInfo_0[1] = {
             { /* pBufferInfo = */
                 /* buffer = */ VkBuffer_1136,
@@ -2765,11 +2831,10 @@ void InjectionContainer::UpdateDescriptorSets()
             /* pBufferInfo = */ pBufferInfo_2,
             /* pTexelBufferView = */ NULL,
         };
-    }
-    
-    
-    //VkDescriptorSet_15840555
-    {
+
+
+
+        //VkDescriptorSet_15840555 - 11 writes
         VkDescriptorBufferInfo pBufferInfo_3[1] = {
             { /* pBufferInfo = */
                 /* buffer = */ VkBuffer_1136,
@@ -2971,6 +3036,26 @@ void InjectionContainer::UpdateDescriptorSets()
             /* pBufferInfo = */ pBufferInfo_13,
             /* pTexelBufferView = */ NULL,
         };
+
+        VkWriteDescriptorSet pDescriptorWrites[14] = {
+            /* pDescriptorWrites = */ pDescriptorWrites_0,
+            /* pDescriptorWrites = */ pDescriptorWrites_1,
+            /* pDescriptorWrites = */ pDescriptorWrites_2,
+            /* pDescriptorWrites = */ pDescriptorWrites_3,
+            /* pDescriptorWrites = */ pDescriptorWrites_4,
+            /* pDescriptorWrites = */ pDescriptorWrites_5,
+            /* pDescriptorWrites = */ pDescriptorWrites_6,
+            /* pDescriptorWrites = */ pDescriptorWrites_7,
+            /* pDescriptorWrites = */ pDescriptorWrites_8,
+            /* pDescriptorWrites = */ pDescriptorWrites_9,
+            /* pDescriptorWrites = */ pDescriptorWrites_10,
+            /* pDescriptorWrites = */ pDescriptorWrites_11,
+            /* pDescriptorWrites = */ pDescriptorWrites_12,
+            /* pDescriptorWrites = */ pDescriptorWrites_13,
+        };
+        VkCopyDescriptorSet* pDescriptorCopies = NULL;
+        //vkUpdateDescriptorSets(VkDevice_5, 14, pDescriptorWrites, 0, pDescriptorCopies);
+        vkUpdateDescriptorSets(m_device, 14, pDescriptorWrites, 0, pDescriptorCopies);
     }
 
 }

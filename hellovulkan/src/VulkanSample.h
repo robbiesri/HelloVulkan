@@ -27,6 +27,8 @@
 #include <vulkan/vulkan.h>
 #include <memory>
 
+#include "Injection.h"
+
 namespace AMD
 {
 class Window;
@@ -44,6 +46,8 @@ public:
     bool IsInitialized() { return (instance_ != VK_NULL_HANDLE && device_ != VK_NULL_HANDLE); }
     void Run(const int frameCount);
     struct ImportTable;
+
+    InjectionContainer injectionContainer;
 
 protected:
     int GetQueueSlot() const

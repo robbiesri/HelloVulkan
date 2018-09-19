@@ -705,6 +705,8 @@ void VulkanSample::Run(const int frameCount)
 
         InitializeImpl(setupCommandBuffer_);
 
+        injectionContainer.CreateResources(device_);
+
         vkEndCommandBuffer(setupCommandBuffer_);
 
         VkSubmitInfo submitInfo = {};
