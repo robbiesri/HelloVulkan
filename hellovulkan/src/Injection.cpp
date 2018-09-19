@@ -44,16 +44,6 @@ VkBufferView_1360;
 VkBufferView_4258
 VkBufferView_4283;
 
-VkSampler_1174;
-VkSampler_18590;
-VkSampler_18587;
-VkSampler_18586;
-VkSampler_1179;
-VkSampler_1176;
-VkSampler_1177;
-VkSampler_1051
-VkSampler_6244
-
 VkImage_9013537
 VkImage_9434269
 VkImage_9013954
@@ -139,6 +129,16 @@ VkDescriptorSet_15840555
 VkDescriptorPool_22232
 VkDescriptorPool_1137
 
+VkSampler_1174;
+VkSampler_18590;
+VkSampler_18587;
+VkSampler_18586;
+VkSampler_1179;
+VkSampler_1176;
+VkSampler_1177;
+VkSampler_1051
+VkSampler_6244
+
 ************************
 To update:
 
@@ -165,6 +165,8 @@ void InjectionContainer::CreateResources(VkDevice device)
     // update descriptor sets
     // only need to do this once!
     UpdateDescriptorSets();
+
+    CreateSamplers();
 }
 
 void InjectionContainer::BuildCommandBuffer(VkCommandBuffer commandBuffer)
@@ -3140,5 +3142,223 @@ void InjectionContainer::CreateImageViews()
 
 void InjectionContainer::CreateSamplers()
 {
+    {
+        VkSamplerCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* magFilter = */ VK_FILTER_NEAREST,
+            /* minFilter = */ VK_FILTER_NEAREST,
+            /* mipmapMode = */ VK_SAMPLER_MIPMAP_MODE_NEAREST,
+            /* addressModeU = */ VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
+            /* addressModeV = */ VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
+            /* addressModeW = */ VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
+            /* mipLodBias = */ 0.000000f,
+            /* anisotropyEnable = */ 0u,
+            /* maxAnisotropy = */ 0.000000f,
+            /* compareEnable = */ 0u,
+            /* compareOp = */ VK_COMPARE_OP_NEVER,
+            /* minLod = */ -340282346638528859811704183484516925440.000000f,
+            /* maxLod = */ 340282346638528859811704183484516925440.000000f,
+            /* borderColor = */ VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK,
+            /* unnormalizedCoordinates = */ 0u,
+        };
+        //VkResult result = vkCreateSampler(VkDevice_5, &CreateInfo, NULL, &VkSampler_1174);
+        VkResult result = vkCreateSampler(m_device, &CreateInfo, NULL, &VkSampler_1174);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkSamplerCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* magFilter = */ VK_FILTER_NEAREST,
+            /* minFilter = */ VK_FILTER_NEAREST,
+            /* mipmapMode = */ VK_SAMPLER_MIPMAP_MODE_NEAREST,
+            /* addressModeU = */ VK_SAMPLER_ADDRESS_MODE_REPEAT,
+            /* addressModeV = */ VK_SAMPLER_ADDRESS_MODE_REPEAT,
+            /* addressModeW = */ VK_SAMPLER_ADDRESS_MODE_REPEAT,
+            /* mipLodBias = */ 0.000000f,
+            /* anisotropyEnable = */ 0u,
+            /* maxAnisotropy = */ 0.000000f,
+            /* compareEnable = */ 0u,
+            /* compareOp = */ VK_COMPARE_OP_NEVER,
+            /* minLod = */ -340282346638528859811704183484516925440.000000f,
+            /* maxLod = */ 340282346638528859811704183484516925440.000000f,
+            /* borderColor = */ VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK,
+            /* unnormalizedCoordinates = */ 0u,
+        };
+        //VkResult result = vkCreateSampler(VkDevice_5, &CreateInfo, NULL, &VkSampler_18590);
+        VkResult result = vkCreateSampler(m_device, &CreateInfo, NULL, &VkSampler_18590);
+        assert(result == VK_SUCCESS);
+    }
 
+    {
+    VkSamplerCreateInfo CreateInfo = {
+        /* sType = */ VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO,
+        /* pNext = */ NULL,
+        /* flags = */ 0,
+        /* magFilter = */ VK_FILTER_LINEAR,
+        /* minFilter = */ VK_FILTER_LINEAR,
+        /* mipmapMode = */ VK_SAMPLER_MIPMAP_MODE_LINEAR,
+        /* addressModeU = */ VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
+        /* addressModeV = */ VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
+        /* addressModeW = */ VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
+        /* mipLodBias = */ 0.000000f,
+        /* anisotropyEnable = */ 0u,
+        /* maxAnisotropy = */ 0.000000f,
+        /* compareEnable = */ 0u,
+        /* compareOp = */ VK_COMPARE_OP_NEVER,
+        /* minLod = */ -340282346638528859811704183484516925440.000000f,
+        /* maxLod = */ 340282346638528859811704183484516925440.000000f,
+        /* borderColor = */ VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK,
+        /* unnormalizedCoordinates = */ 0u,
+    };
+    VkResult result = vkCreateSampler(m_device, &CreateInfo, NULL, &VkSampler_18587);
+    assert(result == VK_SUCCESS);
+    }
+    {
+        VkSamplerCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* magFilter = */ VK_FILTER_LINEAR,
+            /* minFilter = */ VK_FILTER_LINEAR,
+            /* mipmapMode = */ VK_SAMPLER_MIPMAP_MODE_LINEAR,
+            /* addressModeU = */ VK_SAMPLER_ADDRESS_MODE_REPEAT,
+            /* addressModeV = */ VK_SAMPLER_ADDRESS_MODE_REPEAT,
+            /* addressModeW = */ VK_SAMPLER_ADDRESS_MODE_REPEAT,
+            /* mipLodBias = */ 0.000000f,
+            /* anisotropyEnable = */ 0u,
+            /* maxAnisotropy = */ 0.000000f,
+            /* compareEnable = */ 0u,
+            /* compareOp = */ VK_COMPARE_OP_NEVER,
+            /* minLod = */ -340282346638528859811704183484516925440.000000f,
+            /* maxLod = */ 340282346638528859811704183484516925440.000000f,
+            /* borderColor = */ VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK,
+            /* unnormalizedCoordinates = */ 0u,
+        };
+        VkResult result = vkCreateSampler(m_device, &CreateInfo, NULL, &VkSampler_18586);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkSamplerCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* magFilter = */ VK_FILTER_LINEAR,
+            /* minFilter = */ VK_FILTER_LINEAR,
+            /* mipmapMode = */ VK_SAMPLER_MIPMAP_MODE_LINEAR,
+            /* addressModeU = */ VK_SAMPLER_ADDRESS_MODE_REPEAT,
+            /* addressModeV = */ VK_SAMPLER_ADDRESS_MODE_REPEAT,
+            /* addressModeW = */ VK_SAMPLER_ADDRESS_MODE_REPEAT,
+            /* mipLodBias = */ 0.000000f,
+            /* anisotropyEnable = */ 1u,
+            /* maxAnisotropy = */ 16.000000f,
+            /* compareEnable = */ 0u,
+            /* compareOp = */ VK_COMPARE_OP_NEVER,
+            /* minLod = */ -340282346638528859811704183484516925440.000000f,
+            /* maxLod = */ 340282346638528859811704183484516925440.000000f,
+            /* borderColor = */ VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK,
+            /* unnormalizedCoordinates = */ 0u,
+        };
+        VkResult result = vkCreateSampler(m_device, &CreateInfo, NULL, &VkSampler_1179);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkSamplerCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* magFilter = */ VK_FILTER_LINEAR,
+            /* minFilter = */ VK_FILTER_LINEAR,
+            /* mipmapMode = */ VK_SAMPLER_MIPMAP_MODE_LINEAR,
+            /* addressModeU = */ VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER,
+            /* addressModeV = */ VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER,
+            /* addressModeW = */ VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER,
+            /* mipLodBias = */ 0.000000f,
+            /* anisotropyEnable = */ 0u,
+            /* maxAnisotropy = */ 0.000000f,
+            /* compareEnable = */ 1u,
+            /* compareOp = */ VK_COMPARE_OP_LESS_OR_EQUAL,
+            /* minLod = */ -340282346638528859811704183484516925440.000000f,
+            /* maxLod = */ 340282346638528859811704183484516925440.000000f,
+            /* borderColor = */ VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE,
+            /* unnormalizedCoordinates = */ 0u,
+        };
+        VkResult result = vkCreateSampler(m_device, &CreateInfo, NULL, &VkSampler_1176);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkSamplerCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* magFilter = */ VK_FILTER_LINEAR,
+            /* minFilter = */ VK_FILTER_LINEAR,
+            /* mipmapMode = */ VK_SAMPLER_MIPMAP_MODE_LINEAR,
+            /* addressModeU = */ VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT,
+            /* addressModeV = */ VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT,
+            /* addressModeW = */ VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT,
+            /* mipLodBias = */ 0.000000f,
+            /* anisotropyEnable = */ 0u,
+            /* maxAnisotropy = */ 0.000000f,
+            /* compareEnable = */ 0u,
+            /* compareOp = */ VK_COMPARE_OP_NEVER,
+            /* minLod = */ -340282346638528859811704183484516925440.000000f,
+            /* maxLod = */ 340282346638528859811704183484516925440.000000f,
+            /* borderColor = */ VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK,
+            /* unnormalizedCoordinates = */ 0u,
+        };
+        VkResult result = vkCreateSampler(m_device, &CreateInfo, NULL, &VkSampler_1177);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkSamplerCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* magFilter = */ VK_FILTER_LINEAR,
+            /* minFilter = */ VK_FILTER_LINEAR,
+            /* mipmapMode = */ VK_SAMPLER_MIPMAP_MODE_LINEAR,
+            /* addressModeU = */ VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
+            /* addressModeV = */ VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
+            /* addressModeW = */ VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
+            /* mipLodBias = */ 0.000000f,
+            /* anisotropyEnable = */ 0u,
+            /* maxAnisotropy = */ 0.000000f,
+            /* compareEnable = */ 0u,
+            /* compareOp = */ VK_COMPARE_OP_NEVER,
+            /* minLod = */ -340282346638528859811704183484516925440.000000f,
+            /* maxLod = */ 340282346638528859811704183484516925440.000000f,
+            /* borderColor = */ VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK,
+            /* unnormalizedCoordinates = */ 0u,
+        };
+        VkResult result = vkCreateSampler(m_device, &CreateInfo, NULL, &VkSampler_1051);
+        assert(result == VK_SUCCESS);
+    }    
+    {
+        VkSamplerCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* magFilter = */ VK_FILTER_LINEAR,
+            /* minFilter = */ VK_FILTER_LINEAR,
+            /* mipmapMode = */ VK_SAMPLER_MIPMAP_MODE_LINEAR,
+            /* addressModeU = */ VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER,
+            /* addressModeV = */ VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER,
+            /* addressModeW = */ VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER,
+            /* mipLodBias = */ 0.000000f,
+            /* anisotropyEnable = */ 0u,
+            /* maxAnisotropy = */ 0.000000f,
+            /* compareEnable = */ 0u,
+            /* compareOp = */ VK_COMPARE_OP_NEVER,
+            /* minLod = */ -340282346638528859811704183484516925440.000000f,
+            /* maxLod = */ 340282346638528859811704183484516925440.000000f,
+            /* borderColor = */ VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK,
+            /* unnormalizedCoordinates = */ 0u,
+        };
+        VkResult result = vkCreateSampler(m_device, &CreateInfo, NULL, &VkSampler_6244);
+        assert(result == VK_SUCCESS);
+    }
 }
