@@ -162,11 +162,13 @@ void InjectionContainer::CreateResources(VkDevice device)
     CreateDescriptorPools();
     AllocateDescriptorSets();
 
+    CreateSamplers();
+
+    AllocateMemory();
+
     // update descriptor sets
     // only need to do this once!
     UpdateDescriptorSets();
-
-    CreateSamplers();
 }
 
 void InjectionContainer::BuildCommandBuffer(VkCommandBuffer commandBuffer)
@@ -3117,6 +3119,163 @@ void InjectionContainer::UpdateDescriptorSets()
 
 void InjectionContainer::AllocateMemory()
 {
+    // any of these might need to change memory type index or the memory size
+    // index should be easy
+    // size...maybe not
+
+    //      buffer memory
+    {
+        VkMemoryAllocateInfo AllocateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+            /* pNext = */ NULL,
+            /* allocationSize = */ 67108864u,
+            /* memoryTypeIndex = */ 1u, // WARNING
+        };
+        VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_185);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkMemoryAllocateInfo AllocateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+            /* pNext = */ NULL,
+            /* allocationSize = */ 67108864u,
+            /* memoryTypeIndex = */ 0u,
+        };
+        VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_963);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkMemoryAllocateInfo AllocateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+            /* pNext = */ NULL,
+            /* allocationSize = */ 67108864u,
+            /* memoryTypeIndex = */ 0u,
+        };
+        VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_13619);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkMemoryAllocateInfo AllocateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+            /* pNext = */ NULL,
+            /* allocationSize = */ 67108864u,
+            /* memoryTypeIndex = */ 1u, // WARNING
+        };
+        VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_4228);
+        assert(result == VK_SUCCESS);
+    }
+
+    //    image memory
+    {
+        VkMemoryAllocateInfo AllocateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+            /* pNext = */ NULL,
+            /* allocationSize = */ 67108864u,
+            /* memoryTypeIndex = */ 0u,
+        };
+        VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_8977521);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkMemoryAllocateInfo AllocateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+            /* pNext = */ NULL,
+            /* allocationSize = */ 67108864u,
+            /* memoryTypeIndex = */ 0u,
+        };
+        VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_9414592);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkMemoryAllocateInfo AllocateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+            /* pNext = */ NULL,
+            /* allocationSize = */ 67108864u,
+            /* memoryTypeIndex = */ 0u,
+        };
+        VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_7793);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkMemoryAllocateInfo AllocateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+            /* pNext = */ NULL,
+            /* allocationSize = */ 67108864u,
+            /* memoryTypeIndex = */ 0u,
+        };
+        VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_9331068);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkMemoryAllocateInfo AllocateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+            /* pNext = */ NULL,
+            /* allocationSize = */ 67108864u,
+            /* memoryTypeIndex = */ 0u,
+        };
+        VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_9291315);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkMemoryAllocateInfo AllocateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+            /* pNext = */ NULL,
+            /* allocationSize = */ 67108864u,
+            /* memoryTypeIndex = */ 0u,
+        };
+        VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_21191);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkMemoryAllocateInfo AllocateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+            /* pNext = */ NULL,
+            /* allocationSize = */ 41156608u,
+            /* memoryTypeIndex = */ 0u,
+        };
+        VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_21183);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkMemoryAllocateInfo AllocateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+            /* pNext = */ NULL,
+            /* allocationSize = */ 41156608u,
+            /* memoryTypeIndex = */ 0u,
+        };
+        VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_21187);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkMemoryAllocateInfo AllocateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+            /* pNext = */ NULL,
+            /* allocationSize = */ 67108864u,
+            /* memoryTypeIndex = */ 0u,
+        };
+        VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_8976432);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkMemoryAllocateInfo AllocateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+            /* pNext = */ NULL,
+            /* allocationSize = */ 67108864u,
+            /* memoryTypeIndex = */ 0u,
+        };
+        VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_18858);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkMemoryAllocateInfo AllocateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+            /* pNext = */ NULL,
+            /* allocationSize = */ 67108864u,
+            /* memoryTypeIndex = */ 0u,
+        };
+        VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_10831813);
+        assert(result == VK_SUCCESS);
+    }
 
 }
 
