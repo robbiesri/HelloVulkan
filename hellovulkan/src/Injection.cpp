@@ -6,44 +6,6 @@
 /*
 To create:
 
-buffer memory
-VkDeviceMemory_185
-VkDeviceMemory_963
-VkDeviceMemory_13619
-VkDeviceMemory_4228
-
-image memory
-VkDeviceMemory_8977521
-VkDeviceMemory_9414592
-VkDeviceMemory_7793
-VkDeviceMemory_9331068
-VkDeviceMemory_9291315
-VkDeviceMemory_21191
-VkDeviceMemory_21183
-VkDeviceMemory_21187 
-VkDeviceMemory_8976432
-VkDeviceMemory_18858
-VkDeviceMemory_10831813
-
-VkBuffer_1136;
-VkBuffer_1091;
-VkBuffer_19003;
-VkBuffer_8981352;
-VkBuffer_10838418;
-VkBuffer_1373;
-VkBuffer_4271;
-VkBuffer_4275;
-
-VkBuffer_1096
-VkBuffer_1358
-VkBuffer_4256
-VkBuffer_4281
-
-VkBufferView_1098;
-VkBufferView_1360;
-VkBufferView_4258
-VkBufferView_4283;
-
 VkImage_9013537
 VkImage_9434269
 VkImage_9013954
@@ -139,8 +101,70 @@ VkSampler_1177;
 VkSampler_1051
 VkSampler_6244
 
+buffer memory
+VkDeviceMemory_185
+VkDeviceMemory_963
+VkDeviceMemory_13619
+VkDeviceMemory_4228
+VkDeviceMemory_1359
+VkDeviceMemory_1376
+
+image memory
+VkDeviceMemory_8977521
+VkDeviceMemory_9414592
+VkDeviceMemory_7793
+VkDeviceMemory_9331068
+VkDeviceMemory_9291315
+VkDeviceMemory_21191
+VkDeviceMemory_21183
+VkDeviceMemory_21187
+VkDeviceMemory_8976432
+VkDeviceMemory_18858
+VkDeviceMemory_10831813
+
+VkBuffer_1136;
+VkBuffer_1091;
+VkBuffer_19003;
+VkBuffer_8981352;
+VkBuffer_10838418;
+VkBuffer_1373;
+VkBuffer_4271;
+VkBuffer_4275;
+
+VkBuffer_1096
+VkBuffer_1358
+VkBuffer_4256
+VkBuffer_4281
+
+VkBufferView_1098;
+VkBufferView_1360;
+VkBufferView_4258
+VkBufferView_4283;
+
 ************************
 To update:
+
+initialize memories?
+buffer memory
+VkDeviceMemory_185
+VkDeviceMemory_963
+VkDeviceMemory_13619
+VkDeviceMemory_4228
+VkDeviceMemory_1359
+VkDeviceMemory_1376
+
+image memory
+VkDeviceMemory_8977521
+VkDeviceMemory_9414592
+VkDeviceMemory_7793
+VkDeviceMemory_9331068
+VkDeviceMemory_9291315
+VkDeviceMemory_21191
+VkDeviceMemory_21183
+VkDeviceMemory_21187
+VkDeviceMemory_8976432
+VkDeviceMemory_18858
+VkDeviceMemory_10831813
 
 Updated:
 
@@ -149,6 +173,8 @@ VkDescriptorSet_15840362
 VkDescriptorSet_1254
 VkDescriptorSet_15840552
 VkDescriptorSet_15840555
+
+
 
 */
 
@@ -165,6 +191,10 @@ void InjectionContainer::CreateResources(VkDevice device)
     CreateSamplers();
 
     AllocateMemory();
+
+    CreateBuffers();
+    BindBufferMemory();
+    CreateBufferViews();
 
     // update descriptor sets
     // only need to do this once!
@@ -3164,6 +3194,27 @@ void InjectionContainer::AllocateMemory()
         VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_4228);
         assert(result == VK_SUCCESS);
     }
+    {
+        VkMemoryAllocateInfo AllocateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+            /* pNext = */ NULL,
+            /* allocationSize = */ 266338304u,
+            /* memoryTypeIndex = */ 1u,
+        };
+        VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_1359);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkMemoryAllocateInfo AllocateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+            /* pNext = */ NULL,
+            /* allocationSize = */ 67108864u,
+            /* memoryTypeIndex = */ 0u,
+        };
+        VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_1376);
+        assert(result == VK_SUCCESS);
+    }
+
 
     //    image memory
     {
@@ -3281,15 +3332,291 @@ void InjectionContainer::AllocateMemory()
 
 void InjectionContainer::CreateBuffers()
 {
+    {
+        VkBufferCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkBufferCreateFlagBits(0),
+            /* size = */ 18874368u,
+            /* usage = */ VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+        };
+        //VkBufferCreateInfo_1136 = CreateInfo;
+        VkResult result = vkCreateBuffer(m_device, &CreateInfo, NULL, &VkBuffer_1136);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkBufferCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkBufferCreateFlagBits(0),
+            /* size = */ 352u,
+            /* usage = */ VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT | VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+        };
+        //VkBufferCreateInfo_1091 = CreateInfo;
+        VkResult result = vkCreateBuffer(m_device, &CreateInfo, NULL, &VkBuffer_1091);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkBufferCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkBufferCreateFlagBits(0),
+            /* size = */ 4096u,
+            /* usage = */ VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT | VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+        };
+        //VkBufferCreateInfo_19003 = CreateInfo;
+        VkResult result = vkCreateBuffer(m_device, &CreateInfo, NULL, &VkBuffer_19003);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkBufferCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkBufferCreateFlagBits(0),
+            /* size = */ 15000u,
+            /* usage = */ VK_BUFFER_USAGE_TRANSFER_SRC_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT | VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+        };
+        //VkBufferCreateInfo_8981352 = CreateInfo;
+        VkResult result = vkCreateBuffer(m_device, &CreateInfo, NULL, &VkBuffer_8981352);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkBufferCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkBufferCreateFlagBits(0),
+            /* size = */ 638976u,
+            /* usage = */ VK_BUFFER_USAGE_TRANSFER_SRC_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT | VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+        };
+        //VkBufferCreateInfo_10838418 = CreateInfo;
+        VkResult result = vkCreateBuffer(m_device, &CreateInfo, NULL, &VkBuffer_10838418);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkBufferCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkBufferCreateFlagBits(0),
+            /* size = */ 16777208u,
+            /* usage = */ VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT | VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+        };
+        //VkBufferCreateInfo_1373 = CreateInfo;
+        VkResult result = vkCreateBuffer(m_device, &CreateInfo, NULL, &VkBuffer_1373);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkBufferCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkBufferCreateFlagBits(0),
+            /* size = */ 16u,
+            /* usage = */ VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT | VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+        };
+        //VkBufferCreateInfo_4271 = CreateInfo;
+        VkResult result = vkCreateBuffer(m_device, &CreateInfo, NULL, &VkBuffer_4271);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkBufferCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkBufferCreateFlagBits(0),
+            /* size = */ 1440000u,
+            /* usage = */ VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT | VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+        };
+        //VkBufferCreateInfo_4275 = CreateInfo;
+        VkResult result = vkCreateBuffer(m_device, &CreateInfo, NULL, &VkBuffer_4275);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkBufferCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkBufferCreateFlagBits(0),
+            /* size = */ 1104u,
+            /* usage = */ VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT | VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+        };
+        //VkBufferCreateInfo_1096 = CreateInfo;
+        VkResult result = vkCreateBuffer(m_device, &CreateInfo, NULL, &VkBuffer_1096);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkBufferCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkBufferCreateFlagBits(0),
+            /* size = */ 266338304u,
+            /* usage = */ VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+        };
+        //VkBufferCreateInfo_1358 = CreateInfo;
+        VkResult result = vkCreateBuffer(m_device, &CreateInfo, NULL, &VkBuffer_1358);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkBufferCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkBufferCreateFlagBits(0),
+            /* size = */ 12779520u,
+            /* usage = */ VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT | VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT | VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+        };
+        //VkBufferCreateInfo_4256 = CreateInfo;
+        VkResult result = vkCreateBuffer(m_device, &CreateInfo, NULL, &VkBuffer_4256);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkBufferCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkBufferCreateFlagBits(0),
+            /* size = */ 2555904u,
+            /* usage = */ VK_BUFFER_USAGE_TRANSFER_SRC_BIT | VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT | VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+        };
+        //VkBufferCreateInfo_4281 = CreateInfo;
+        VkResult result = vkCreateBuffer(m_device, &CreateInfo, NULL, &VkBuffer_4281);
+        assert(result == VK_SUCCESS);
+    }
+}
 
+void InjectionContainer::BindBufferMemory()
+{
+    VkResult result;
+    
+    result = vkBindBufferMemory(m_device, VkBuffer_1136, VkDeviceMemory_185, 4096 /* rdoc:value 4096 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindBufferMemory(m_device, VkBuffer_1091, VkDeviceMemory_963, 4771648 /* rdoc:value 4771648 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindBufferMemory(m_device, VkBuffer_19003, VkDeviceMemory_13619, 29159424 /* rdoc:value 29159424 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindBufferMemory(m_device, VkBuffer_8981352, VkDeviceMemory_4228, 28761024 /* rdoc:value 28761024 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindBufferMemory(m_device, VkBuffer_10838418, VkDeviceMemory_4228, 33729888 /* rdoc:value 33729888 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindBufferMemory(m_device, VkBuffer_1373, VkDeviceMemory_963, 9916416 /* rdoc:value 9916416 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindBufferMemory(m_device, VkBuffer_4271, VkDeviceMemory_963, 61606976 /* rdoc:value 61606976 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindBufferMemory(m_device, VkBuffer_4275, VkDeviceMemory_963, 61606992 /* rdoc:value 61606992 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindBufferMemory(m_device, VkBuffer_1096, VkDeviceMemory_963, 4773456 /* rdoc:value 4773456 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindBufferMemory(m_device, VkBuffer_1358, VkDeviceMemory_1359, 0 /* rdoc:value 0 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindBufferMemory(m_device, VkBuffer_4256, VkDeviceMemory_1376, 44236800 /* rdoc:value 44236800 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindBufferMemory(m_device, VkBuffer_4281, VkDeviceMemory_963, 63082496 /* rdoc:value 63082496 */);
+    assert(result == VK_SUCCESS);
 }
 
 void InjectionContainer::CreateBufferViews()
 {
-
+    {
+        VkBufferViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* buffer = */ VkBuffer_1096,
+            /* format = */ VK_FORMAT_R32_SFLOAT,
+            /* offset = */ 0u,
+            /* range = */ 1104u,
+        };
+        VkResult result = vkCreateBufferView(m_device, &CreateInfo, NULL, &VkBufferView_1098);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkBufferViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* buffer = */ VkBuffer_1358,
+            /* format = */ VK_FORMAT_R32G32B32A32_SFLOAT,
+            /* offset = */ 0u,
+            /* range = */ 266338304u,
+        };
+        VkResult result = vkCreateBufferView(m_device, &CreateInfo, NULL, &VkBufferView_1360);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkBufferViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* buffer = */ VkBuffer_4256,
+            /* format = */ VK_FORMAT_R32_UINT,
+            /* offset = */ 0u,
+            /* range = */ 12779520u,
+        };
+        VkResult result = vkCreateBufferView(m_device, &CreateInfo, NULL, &VkBufferView_4258);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkBufferViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* buffer = */ VkBuffer_4281,
+            /* format = */ VK_FORMAT_R32_SFLOAT,
+            /* offset = */ 0u,
+            /* range = */ 2555904u,
+        };
+        VkResult result = vkCreateBufferView(m_device, &CreateInfo, NULL, &VkBufferView_4283);
+        assert(result == VK_SUCCESS);
+    }
 }
 
 void InjectionContainer::CreateImages()
+{
+
+}
+
+void InjectionContainer::BindImageMemory()
 {
 
 }

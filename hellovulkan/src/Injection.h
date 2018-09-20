@@ -33,6 +33,8 @@ private:
     VkDeviceMemory VkDeviceMemory_963;
     VkDeviceMemory VkDeviceMemory_13619;
     VkDeviceMemory VkDeviceMemory_4228;
+    VkDeviceMemory VkDeviceMemory_1359;
+    VkDeviceMemory VkDeviceMemory_1376;
 
     // image memory
     VkDeviceMemory VkDeviceMemory_8977521;
@@ -148,8 +150,10 @@ private:
 
     void AllocateMemory();
     void CreateBuffers();
+    void BindBufferMemory();
     void CreateBufferViews();
     void CreateImages();
+    void BindImageMemory();
     void CreateImageViews();
     void CreateSamplers();
 
