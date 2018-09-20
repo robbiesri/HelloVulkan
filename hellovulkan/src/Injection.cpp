@@ -6,68 +6,6 @@
 /*
 To create:
 
-VkImage_9013537
-VkImage_9434269
-VkImage_9013954
-VkImage_10929
-VkImage_9331134
-VkImage_9331137
-VkImage_9331096
-VkImage_9331099
-VkImage_9331090
-VkImage_1453
-VkImage_34748
-VkImage_21182
-VkImage_21186
-VkImage_21190
-VkImage_21194
-VkImage_18801
-VkImage_21197
-VkImage_972
-VkImage_987
-VkImage_984
-VkImage_10882643
-VkImage_10894040
-VkImage_10882657
-VkImage_10832257
-VkImage_19025
-VkImage_1017
-VkImage_1026
-VkImage_1441
-VkImage_10831998
-VkImage_18649
-
-VkImageView_9013541;
-VkImageView_9434270;
-VkImageView_9013956;
-VkImageView_10931;
-VkImageView_9331135;
-VkImageView_9331138;
-VkImageView_9331097;
-VkImageView_9331100;
-VkImageView_9331091;
-VkImageView_1454;
-VkImageView_34751;
-VkImageView_21184;
-VkImageView_21188;
-VkImageView_21192;
-VkImageView_21195;
-VkImageView_18802
-VkImageView_21199
-VkImageView_973
-VkImageView_988
-VkImageView_985
-VkImageView_10882645
-VkImageView_10894042
-VkImageView_10882658
-VkImageView_10832259
-VkImageView_19027
-VkImageView_1018
-VkImageView_1027
-VkImageView_1442
-VkImageView_10832000
-VkImageView_18651
-
 shader module
 graphics pipeline
 bind pipeline layout to graphics pipeline
@@ -141,6 +79,70 @@ VkBufferView_1360;
 VkBufferView_4258
 VkBufferView_4283;
 
+
+VkImage_9013537
+VkImage_9434269
+VkImage_9013954
+VkImage_10929
+VkImage_9331134
+VkImage_9331137
+VkImage_9331096
+VkImage_9331099
+VkImage_9331090
+VkImage_1453
+VkImage_34748
+VkImage_21182
+VkImage_21186
+VkImage_21190
+VkImage_21194
+VkImage_18801
+VkImage_21197
+VkImage_972
+VkImage_987
+VkImage_984
+VkImage_10882643
+VkImage_10894040
+VkImage_10882657
+VkImage_10832257
+VkImage_19025
+VkImage_1017
+VkImage_1026
+VkImage_1441
+VkImage_10831998
+VkImage_18649
+
+VkImageView_9013541;
+VkImageView_9434270;
+VkImageView_9013956;
+VkImageView_10931;
+VkImageView_9331135;
+VkImageView_9331138;
+VkImageView_9331097;
+VkImageView_9331100;
+VkImageView_9331091;
+VkImageView_1454;
+VkImageView_34751;
+VkImageView_21184;
+VkImageView_21188;
+VkImageView_21192;
+VkImageView_21195;
+VkImageView_18802
+VkImageView_21199
+VkImageView_973
+VkImageView_988
+VkImageView_985
+VkImageView_10882645
+VkImageView_10894042
+VkImageView_10882658
+VkImageView_10832259
+VkImageView_19027
+VkImageView_1018
+VkImageView_1027
+VkImageView_1442
+VkImageView_10832000
+VkImageView_18651
+
+
 ************************
 To update:
 
@@ -195,6 +197,10 @@ void InjectionContainer::CreateResources(VkDevice device)
     CreateBuffers();
     BindBufferMemory();
     CreateBufferViews();
+
+    CreateImages();
+    BindImageMemory();
+    CreateImageViews();
 
     // update descriptor sets
     // only need to do this once!
@@ -3613,17 +3619,1639 @@ void InjectionContainer::CreateBufferViews()
 
 void InjectionContainer::CreateImages()
 {
-
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_R8_UNORM,
+            { /* extent = */
+                /* width = */ 512u,
+                /* height = */ 512u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_9013537 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_9013537);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_R8G8B8A8_SNORM,
+            { /* extent = */
+                /* width = */ 128u,
+                /* height = */ 128u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_9434269 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_9434269);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_R8G8B8A8_SNORM,
+            { /* extent = */
+                /* width = */ 2048u,
+                /* height = */ 1u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_9013954 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_9013954);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_BC3_UNORM_BLOCK,
+            { /* extent = */
+                /* width = */ 512u,
+                /* height = */ 512u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 10u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_10929 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_10929);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_R8G8B8A8_UNORM,
+            { /* extent = */
+                /* width = */ 256u,
+                /* height = */ 256u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_9331134 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_9331134);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_R8G8B8A8_UNORM,
+            { /* extent = */
+                /* width = */ 256u,
+                /* height = */ 256u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_9331137 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_9331137);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_BC3_SRGB_BLOCK,
+            { /* extent = */
+                /* width = */ 3432u,
+                /* height = */ 3432u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_9331096 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_9331096);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_BC3_UNORM_BLOCK,
+            { /* extent = */
+                /* width = */ 3432u,
+                /* height = */ 3432u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_9331099 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_9331099);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_R16_UNORM,
+            { /* extent = */
+                /* width = */ 3432u,
+                /* height = */ 3432u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_9331090 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_9331090);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_B8G8R8A8_SRGB,
+            { /* extent = */
+                /* width = */ 4u,
+                /* height = */ 4u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_1453 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_1453);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_BC1_RGBA_UNORM_BLOCK,
+            { /* extent = */
+                /* width = */ 1024u,
+                /* height = */ 1024u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 11u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_34748 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_34748);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_BC3_UNORM_BLOCK,
+            { /* extent = */
+                /* width = */ 6336u,
+                /* height = */ 6336u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_21182 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_21182);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_BC5_UNORM_BLOCK,
+            { /* extent = */
+                /* width = */ 6336u,
+                /* height = */ 6336u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_21186 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_21186);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_BC1_RGBA_UNORM_BLOCK,
+            { /* extent = */
+                /* width = */ 6336u,
+                /* height = */ 6336u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_21190 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_21190);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_BC4_UNORM_BLOCK,
+            { /* extent = */
+                /* width = */ 6336u,
+                /* height = */ 6336u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_21194 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_21194);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_R32_SFLOAT,
+            { /* extent = */
+                /* width = */ 1u,
+                /* height = */ 1u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_18801 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_18801);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_R32_UINT,
+            { /* extent = */
+                /* width = */ 1024u,
+                /* height = */ 1024u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 11u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_STORAGE_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_21197 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_21197);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_R8G8B8A8_UNORM,
+            { /* extent = */
+                /* width = */ 4u,
+                /* height = */ 4u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_972 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_972);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_3D,
+            /* format = */ VK_FORMAT_R8G8B8A8_UNORM,
+            { /* extent = */
+                /* width = */ 4u,
+                /* height = */ 4u,
+                /* depth = */ 4u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_987 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_987);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_3D,
+            /* format = */ VK_FORMAT_R8G8B8A8_UNORM,
+            { /* extent = */
+                /* width = */ 4u,
+                /* height = */ 4u,
+                /* depth = */ 4u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_984 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_984);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_R16_SFLOAT,
+            { /* extent = */
+                /* width = */ 256u,
+                /* height = */ 256u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_STORAGE_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_10882643 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_10882643);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_R8G8_UNORM,
+            { /* extent = */
+                /* width = */ 256u,
+                /* height = */ 256u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_STORAGE_BIT | VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_10894040 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_10894040);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_R8G8B8A8_UNORM,
+            { /* extent = */
+                /* width = */ 64u,
+                /* height = */ 64u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_10882657 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_10882657);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_R16_SFLOAT,
+            { /* extent = */
+                /* width = */ 128u,
+                /* height = */ 128u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_STORAGE_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_10832257 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_10832257);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_R16_SFLOAT,
+            { /* extent = */
+                /* width = */ 256u,
+                /* height = */ 256u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_STORAGE_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_19025 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_19025);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_R32_SFLOAT,
+            { /* extent = */
+                /* width = */ 4u,
+                /* height = */ 4u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_1017 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_1017);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_R32_SFLOAT,
+            { /* extent = */
+                /* width = */ 4u,
+                /* height = */ 4u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 4u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_1026 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_1026);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_B8G8R8A8_UNORM,
+            { /* extent = */
+                /* width = */ 64u,
+                /* height = */ 64u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_1441 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_1441);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_R8G8B8A8_UNORM,
+            { /* extent = */
+                /* width = */ 256u,
+                /* height = */ 256u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 1u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_STORAGE_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_10831998 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_10831998);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkImageCreateFlagBits(0),
+            /* imageType = */ VK_IMAGE_TYPE_2D,
+            /* format = */ VK_FORMAT_R32_SFLOAT,
+            { /* extent = */
+                /* width = */ 512u,
+                /* height = */ 256u,
+                /* depth = */ 1u,
+            },
+            /* mipLevels = */ 9u,
+            /* arrayLayers = */ 1u,
+            /* samples = */ VK_SAMPLE_COUNT_1_BIT,
+            /* tiling = */ VK_IMAGE_TILING_OPTIMAL,
+            /* usage = */ VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_STORAGE_BIT | VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | /*rdoc:init*/ VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+            /* sharingMode = */ VK_SHARING_MODE_EXCLUSIVE,
+            /* queueFamilyIndexCount = */ 0u,
+            /* pQueueFamilyIndices = */ NULL,
+            /* initialLayout = */ VK_IMAGE_LAYOUT_UNDEFINED,
+        };
+        //VkImageCreateInfo_18649 = CreateInfo;
+        VkResult result = vkCreateImage(m_device, &CreateInfo, NULL, &VkImage_18649);
+        assert(result == VK_SUCCESS);
+    }
 }
 
 void InjectionContainer::BindImageMemory()
 {
+    VkResult result;
 
+    result = vkBindImageMemory(m_device, VkImage_9013537, VkDeviceMemory_8977521, 41222144 /* rdoc:value 41222144 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_9434269, VkDeviceMemory_9414592, 26935296 /* rdoc:value 26935296 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_9013954, VkDeviceMemory_8977521, 49283072 /* rdoc:value 49283072 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_10929, VkDeviceMemory_7793, 32374784 /* rdoc:value 32374784 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_9331134, VkDeviceMemory_9331068, 10747904 /* rdoc:value 10747904 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_9331137, VkDeviceMemory_9331068, 11272192 /* rdoc:value 11272192 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_9331096, VkDeviceMemory_9291315, 35127296 /* rdoc:value 35127296 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_9331099, VkDeviceMemory_9291315, 48234496 /* rdoc:value 48234496 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_9331090, VkDeviceMemory_9291315, 10158080 /* rdoc:value 10158080 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_1453, VkDeviceMemory_963, 58884096 /* rdoc:value 58884096 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_34748, VkDeviceMemory_21191, 66060288 /* rdoc:value 66060288 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_21182, VkDeviceMemory_21183, 0 /* rdoc:value 0 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_21186, VkDeviceMemory_21187, 0 /* rdoc:value 0 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_21190, VkDeviceMemory_21191, 0 /* rdoc:value 0 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_21194, VkDeviceMemory_21191, 21495808 /* rdoc:value 21495808 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_18801, VkDeviceMemory_13619, 46956544 /* rdoc:value 46956544 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_21197, VkDeviceMemory_21191, 42991616 /* rdoc:value 42991616 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_972, VkDeviceMemory_963, 32768 /* rdoc:value 32768 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_987, VkDeviceMemory_963, 131072 /* rdoc:value 131072 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_984, VkDeviceMemory_963, 98304 /* rdoc:value 98304 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_10882643, VkDeviceMemory_8976432, 9371648 /* rdoc:value 9371648 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_10894040, VkDeviceMemory_8976432, 26607616 /* rdoc:value 26607616 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_10882657, VkDeviceMemory_8976432, 8544256 /* rdoc:value 8544256 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_10832257, VkDeviceMemory_9331068, 59981824 /* rdoc:value 59981824 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_19025, VkDeviceMemory_18858, 55902208 /* rdoc:value 55902208 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_1017, VkDeviceMemory_963, 622592 /* rdoc:value 622592 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_1026, VkDeviceMemory_963, 671744 /* rdoc:value 671744 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_1441, VkDeviceMemory_963, 58785792 /* rdoc:value 58785792 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_10831998, VkDeviceMemory_10831813, 35454976 /* rdoc:value 35454976 */);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindImageMemory(m_device, VkImage_18649, VkDeviceMemory_13619, 31784960 /* rdoc:value 31784960 */);
+    assert(result == VK_SUCCESS);
 }
 
 void InjectionContainer::CreateImageViews()
 {
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_9013537,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_R8_UNORM,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_9013541);
+        assert(result == VK_SUCCESS);
+    }
 
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_9434269,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_R8G8B8A8_SNORM,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_9434270);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_9013954,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_R8G8B8A8_SNORM,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_9013956);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_10929,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_BC3_UNORM_BLOCK,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 2u,
+                /* levelCount = */ 8u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_10931);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_9331134,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_R8G8B8A8_UNORM,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_9331135);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_9331137,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_R8G8B8A8_UNORM,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_9331138);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_9331096,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_BC3_SRGB_BLOCK,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_9331097);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_9331099,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_BC3_UNORM_BLOCK,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_9331100);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_9331090,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_R16_UNORM,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_9331091);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_1453,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_B8G8R8A8_SRGB,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_1454);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_34748,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_BC1_RGBA_UNORM_BLOCK,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 11u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_34751);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_21182,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_BC3_UNORM_BLOCK,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_21184);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_21186,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_BC5_UNORM_BLOCK,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_21188);
+        assert(result == VK_SUCCESS);
+    }
+
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_21190,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_BC1_RGBA_UNORM_BLOCK,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_21192);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_21194,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_BC4_UNORM_BLOCK,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_21195);
+        assert(result == VK_SUCCESS);
+    }
+
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_18801,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_R32_SFLOAT,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_18802);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_21197,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_R32_UINT,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 11u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_21199);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_972,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_R8G8B8A8_UNORM,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_973);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_987,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_3D,
+            /* format = */ VK_FORMAT_R8G8B8A8_UNORM,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_988);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_984,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_3D,
+            /* format = */ VK_FORMAT_R8G8B8A8_UNORM,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_985);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_10882643,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_R16_SFLOAT,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_10882645);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_10894040,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_R8G8_UNORM,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_10894042);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_10882657,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_R8G8B8A8_UNORM,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_10882658);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_10832257,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_R16_SFLOAT,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_10832259);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_19025,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_R16_SFLOAT,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_19027);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_1017,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_R32_SFLOAT,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_1018);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_1026,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D_ARRAY,
+            /* format = */ VK_FORMAT_R32_SFLOAT,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 4u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_1027);
+        assert(result == VK_SUCCESS);
+    }
+
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_1441,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_B8G8R8A8_UNORM,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_1442);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_10831998,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_R8G8B8A8_UNORM,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 1u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_10832000);
+        assert(result == VK_SUCCESS);
+    }
+    {
+        VkImageViewCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* image = */ VkImage_18649,
+            /* viewType = */ VK_IMAGE_VIEW_TYPE_2D,
+            /* format = */ VK_FORMAT_R32_SFLOAT,
+            { /* components = */
+                /* r = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* g = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* b = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+                /* a = */ VK_COMPONENT_SWIZZLE_IDENTITY,
+            },
+            { /* subresourceRange = */
+                /* aspectMask = */ VK_IMAGE_ASPECT_COLOR_BIT,
+                /* baseMipLevel = */ 0u,
+                /* levelCount = */ 9u,
+                /* baseArrayLayer = */ 0u,
+                /* layerCount = */ 1u,
+            },
+        };
+        VkResult result = vkCreateImageView(m_device, &CreateInfo, NULL, &VkImageView_18651);
+        assert(result == VK_SUCCESS);
+    }
 }
 
 void InjectionContainer::CreateSamplers()
