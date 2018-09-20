@@ -142,6 +142,25 @@ private:
 
     VkPipeline VkPipeline_10836480;
 
+    // initial content buffers
+    struct SourceBufferInfo
+    {
+        VkDeviceMemory deviceMem;
+        VkBuffer buffer;
+        uint32_t expectedSize;
+    };
+
+    SourceBufferInfo VkBuffer_buffer_1136_source; // constant buffer
+
+    SourceBufferInfo VkBuffer_buffer_1358_source; // input buffer + image
+    SourceBufferInfo VkBuffer_image_18649_source;
+
+    SourceBufferInfo VkBuffer_buffer_4256_reset_source; // RW buffers
+    SourceBufferInfo VkBuffer_buffer_10838418_reset_source;
+    SourceBufferInfo VkBuffer_buffer_1373_reset_source;
+    SourceBufferInfo VkBuffer_buffer_4271_reset_source;
+    SourceBufferInfo VkBuffer_buffer_4275_reset_source;
+
     void CreateDescriptorSetLayouts();
     void CreatePipelineLayouts();
     void CreateDescriptorPools();
@@ -157,6 +176,8 @@ private:
     void BindImageMemory();
     void CreateImageViews();
     void CreateSamplers();
+
+    void CreateResetBuffersAndImages();
 
     void InitializeConstantBuffers();
 

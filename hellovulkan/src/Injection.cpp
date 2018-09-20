@@ -178,6 +178,25 @@ VkDescriptorSet_15840555
 
 */
 
+// utils (maybe new file?)
+void ReadBuffer(const char *name, std::vector<uint8_t> &buf)
+{
+    FILE *f = fopen(name, "rb");
+    if (f == NULL)
+    {
+        return;
+    }
+
+    fseek(f, 0, SEEK_END);
+    uint64_t length = ftell(f);
+    buf.resize(length);
+    rewind(f);
+
+    uint64_t result = fread(buf.data(), 1, length, f);
+    fclose(f);
+    assert(result <= length);
+}
+
 void InjectionContainer::CreateResources(VkDevice device)
 {
     m_device = device;
@@ -205,6 +224,8 @@ void InjectionContainer::CreateResources(VkDevice device)
     UpdateDescriptorSets();
 
     CreateShader();
+
+    CreateResetBuffersAndImages();
 }
 
 void InjectionContainer::BuildCommandBuffer(VkCommandBuffer commandBuffer)
@@ -5481,6 +5502,103 @@ void InjectionContainer::CreateSamplers()
     }
 }
 
+void LoadSourceBufferHelper(const char* binaryFileName, uint32_t expectedBufferSize, VkDevice device,
+                          VkBuffer& sourceBuffer, VkDeviceMemory& sourceMemory)
+{
+    std::vector<uint8_t> bufferBinaryData;
+    ReadBuffer(binaryFileName, bufferBinaryData);
+
+    assert(bufferBinaryData.size() == expectedBufferSize);
+
+    VkBufferCreateInfo buffer_src_ci = {
+        VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
+        NULL,
+        0,
+        expectedBufferSize,
+        VK_BUFFER_USAGE_TRANSFER_SRC_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT,
+        VK_SHARING_MODE_EXCLUSIVE,
+        0,
+        NULL };
+    VkResult result = vkCreateBuffer(device, &buffer_src_ci, NULL, &sourceBuffer);
+    assert(result == VK_SUCCESS);
+
+    // TODO: we could assert against data from vkGetBufferMemoryRequirements?
+
+    VkMemoryAllocateInfo memory_ai = {
+        /* sType = */ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+        /* pNext = */ NULL,
+        /* allocationSize = */ expectedBufferSize,
+        /* memoryTypeIndex = */ 1u, // HOST_VISIBLE!
+    };
+    result = vkAllocateMemory(device, &memory_ai, NULL, &sourceMemory);
+    assert(result == VK_SUCCESS);
+
+    result = vkBindBufferMemory(device, sourceBuffer, sourceMemory, 0);
+    assert(result == VK_SUCCESS);
+
+    uint8_t *data = NULL;
+    result = vkMapMemory(device, sourceMemory, 0, expectedBufferSize, 0, (void **)&data);
+    assert(result == VK_SUCCESS);
+
+    memcpy(data, bufferBinaryData.data(), expectedBufferSize);
+
+    VkMappedMemoryRange memory_range = { VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE, NULL, sourceMemory, 0, expectedBufferSize };
+
+    result = vkFlushMappedMemoryRanges(device, 1, &memory_range);
+    assert(result == VK_SUCCESS);
+
+    vkUnmapMemory(device, sourceMemory);
+
+    bufferBinaryData.clear();
+}
+
+void InjectionContainer::CreateResetBuffersAndImages()
+{
+    // Buffer 141 - VkBuffer_1136
+    // Buffer 142 - VkBufferView_1360 - VkBuffer_1358
+    // Image 316 - VkImageView_18651 - VkImage_18649
+    // Buffer 173 - VkBufferView_4258 - VkBuffer_4256
+    // Buffer 2687 - VkBuffer_10838418
+    // Buffer 148 - VkBuffer_1373
+    // Buffer 177 - VkBuffer_4271
+    // Buffer 180 - VkBuffer_4275
+
+    // constant buffer
+    VkBuffer_buffer_1136_source.expectedSize = 18874368u;
+    LoadSourceBufferHelper("buffer141_to_buffer1136.bin", VkBuffer_buffer_1136_source.expectedSize,
+                          m_device, VkBuffer_buffer_1136_source.buffer, VkBuffer_buffer_1136_source.deviceMem);
+
+    // source buffer and image
+    VkBuffer_buffer_1358_source.expectedSize = 266338304u;
+    LoadSourceBufferHelper("buffer142_to_buffer1358.bin", VkBuffer_buffer_1358_source.expectedSize,
+        m_device, VkBuffer_buffer_1358_source.buffer, VkBuffer_buffer_1358_source.deviceMem);
+
+    VkBuffer_image_18649_source.expectedSize = 524288u;
+    LoadSourceBufferHelper("image316_to_image18649.bin", VkBuffer_image_18649_source.expectedSize,
+        m_device, VkBuffer_image_18649_source.buffer, VkBuffer_image_18649_source.deviceMem);
+
+    // RW buffers, pre-dispatch state
+    VkBuffer_buffer_4256_reset_source.expectedSize = 12779520u;
+    LoadSourceBufferHelper("buffer173_pre_to_buffer4256.bin", VkBuffer_buffer_4256_reset_source.expectedSize,
+        m_device, VkBuffer_buffer_4256_reset_source.buffer, VkBuffer_buffer_4256_reset_source.deviceMem);
+
+    VkBuffer_buffer_10838418_reset_source.expectedSize = 638976u;
+    LoadSourceBufferHelper("buffer2587_pre_to_buffer_10838418.bin", VkBuffer_buffer_10838418_reset_source.expectedSize,
+        m_device, VkBuffer_buffer_10838418_reset_source.buffer, VkBuffer_buffer_10838418_reset_source.deviceMem);
+
+    VkBuffer_buffer_1373_reset_source.expectedSize = 16777208u;
+    LoadSourceBufferHelper("buffer148_pre_to_buffer1373.bin", VkBuffer_buffer_1373_reset_source.expectedSize,
+        m_device, VkBuffer_buffer_1373_reset_source.buffer, VkBuffer_buffer_1373_reset_source.deviceMem);
+
+    VkBuffer_buffer_4271_reset_source.expectedSize = 16u;
+    LoadSourceBufferHelper("buffer177_pre_to_buffer4271.bin", VkBuffer_buffer_4271_reset_source.expectedSize,
+        m_device, VkBuffer_buffer_4271_reset_source.buffer, VkBuffer_buffer_4271_reset_source.deviceMem);
+
+    VkBuffer_buffer_4275_reset_source.expectedSize = 1440000u;
+    LoadSourceBufferHelper("buffer180_pre_to_buffer4275.bin", VkBuffer_buffer_4275_reset_source.expectedSize,
+        m_device, VkBuffer_buffer_4275_reset_source.buffer, VkBuffer_buffer_4275_reset_source.deviceMem);
+}
+
 void InjectionContainer::InitializeConstantBuffers()
 {
     /*
@@ -5613,24 +5731,6 @@ void InjectionContainer::ResetMemory()
 
     // I'll have to barrier all the resources into the right spot...
 
-}
-
-void ReadBuffer(const char *name, std::vector<uint8_t> &buf)
-{
-    FILE *f = fopen(name, "rb");
-    if (f == NULL)
-    {
-        return;
-    }
-
-    fseek(f, 0, SEEK_END);
-    uint64_t length = ftell(f);
-    buf.resize(length);
-    rewind(f);
-
-    uint64_t result = fread(buf.data(), 1, length, f);
-    fclose(f);
-    assert(result <= length);
 }
 
 void InjectionContainer::CreateShader()
