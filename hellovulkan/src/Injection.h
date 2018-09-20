@@ -158,6 +158,8 @@ private:
     void CreateImageViews();
     void CreateSamplers();
 
+    void InitializeConstantBuffers();
+
     void ResetMemory();
 
     void CreateShader();

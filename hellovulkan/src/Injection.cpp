@@ -6,11 +6,6 @@
 /*
 To create:
 
-VkShaderModule_9511
-VkPipeline_10836480
-
-bind pipeline layout to graphics pipeline
-
 Created:
 
 VkDescriptorSetLayout_1138
@@ -143,6 +138,8 @@ VkImageView_1442
 VkImageView_10832000
 VkImageView_18651
 
+VkShaderModule_9511
+VkPipeline_10836480
 
 ************************
 To update:
@@ -1886,6 +1883,8 @@ void InjectionContainer::AllocateDescriptorSets()
 
 void InjectionContainer::UpdateDescriptorSets()
 {
+    // TODO: Descriptor buffer ranges are weird
+
     // VkDescriptorSet_15840359 + VkDescriptorSet_15840362
     {
         // VkDescriptorSet_15840359 - 25 writes
@@ -5482,9 +5481,138 @@ void InjectionContainer::CreateSamplers()
     }
 }
 
+void InjectionContainer::InitializeConstantBuffers()
+{
+    /*
+    uniform buffers
+        3 0: Xhlslcc_set_3_bind_0X_InstanceParams_cbuffer Buffer 141 12679536 - 12679856 1 Variables, 320 bytes
+        4 1 : Xhlslcc_set_4_bind_1X_ClusteredInstanceCullingParams_cbuffer Buffer 141 12765088 - 12765104 1 Variables, 16 bytes
+        4 2 : Xhlslcc_set_4_bind_2X_HZBConsts_cbuffer Buffer 141 12677600 - 12677888 1 Variables, 288 bytes
+        4 3 : Xhlslcc_set_4_bind_3X_MiscCullingConsts_cbuffer Buffer 141 12676976 - 12677600 1 Variables, 624 bytes
+    */
+
+        // constant buffers
+        // All part of VkBuffer_1136
+    //struct float4
+    //{
+    //    float x, y, x, w;
+    //};
+    //struct float4x4
+    //{
+    //    float4 row0;
+    //    float4 row1;
+    //    float4 row2;
+    //    float4 row3;
+    //};
+
+    //struct int4
+    //{
+    //    int32_t x, y, z, w;
+    //};
+
+    //struct InstanceParams
+    //{
+    //    float4x4 world;
+    //    float4x4 worldPrevFrame;
+    //    float4x4 worldViewProj;
+    //    float4x4 worldViewProjPrevFrame;
+
+    //    float4 dissolveFactor;
+
+    //    float LODBlendFactor;
+    //    float wetnessBias;
+    //    float alphaTestValue;
+    //    uint32_t materialTableIndex;
+
+    //    uint32_t instanceOffset;
+    //    uint32_t CameraTAADither;
+    //    uint32_t _padmania_0;
+    //    uint32_t _padmania_1;
+
+    //    int4 offsets;
+    //};
+
+    //struct ClusteredInstanceCullingParams
+    //{
+    //    uint32_t MaxClusterChunks;
+    //    uint32_t InstanceCount;
+    //    uint32_t InstanceStartIdx;
+    //    uint32_t _padmania_0;
+    //};
+
+    //struct HZBConsts
+    //{
+    //    float4 ZScaleBias;
+    //    float4x4    ViewProjectionNoTranslation;
+    //    float4     ViewTranslation;
+    //    float4 Viewport;
+    //    float4 MinMipLevel;
+    //    float4 CascadeScale[4];
+    //    float4  CascadeOffset[4];
+    //    int4 CascadeCount;
+    //    float4 HalfPixel;
+    //};
+
+    //struct MiscCullingConsts
+    //{
+    //    float4 ViewerPosition;
+    //    float4 ViewerDirection;
+    //    float4 FrustumPlanes[16];
+    //    float4 AntiFrustumPlanes[16];
+
+    //    uint32_t FrustumPlaneCount;
+    //    uint32_t AntiFrustumPlaneCount;
+    //    float MinTriangleArea;
+    //    uint32_t CullingFlags;
+
+    //    uint32_t ForceLOD;
+    //    float FOVDistanceFactor;
+    //    float GeometricObjectLODDistanceBias;
+    //    float GeometricObjectLODDistanceScale;
+
+    //    float4 LODCullingViewerPosition;
+    //    float4 VPosToUV;
+
+    //    float ProjectorShadowDimensions[2];
+    //    float ProjectorShadowFarClip;
+    //    uint32_t _padmania_0;
+    //};
+}
+
 void InjectionContainer::ResetMemory()
 {
+
+
+    /*
+    input buffers
+    3 3: Xhlslcc_set_3_bind_3X_InstanceParams_instancing_instanceData TexBuffer Buffer 142 R32G32B32A32_FLOAT bytes 0 - 266338304
+    4 24: Xhlslcc_set_4_bind_24X_ClusteredInstanceCullingParams_HZBTexture Texture 2D Image 2D Color Attachment 316 512x256 R32_FLOAT
+
+    RW buffers
+    4 69: Xhlslcc_set_4_bind_69X_ClusteredInstanceCullingParams_BatchRenderIndirect RW TexBuffer Buffer 173 R32_UINT bytes 0 - 12779520
+    4 80: Xhlslcc_set_4_bind_80X_ClusteredInstanceCullingParams_Instances RW Buffer Buffer 2587 638976 bytes Viewing bytes 0 - 638976
+    4 81: Xhlslcc_set_4_bind_81X_ClusteredInstanceCullingParams_GPUPrimitives RW Buffer Buffer 148 16777208 bytes Viewing bytes 0 - 16777208
+    4 86: Xhlslcc_set_4_bind_86X_ClusteredInstanceCullingParams_ChunkCounter RW Buffer Buffer 177 16 bytes Viewing bytes 0 - 16
+    4 87: Xhlslcc_set_4_bind_87X_ClusteredInstanceCullingParams_ChunkCullBuffer RW Buffer Buffer 180 1440000 bytes Viewing bytes 0 - 1440000
+    */
+
+    // I need a mapping from the data buffers I got from RDC to my buffers
+    // Buffer 142 - VkBufferView_1360 - VkBuffer_1358
+    // Image 316 - VkImageView_18651
+    // Buffer 173 - VkBufferView_4258
+    // Buffer 2687 - VkBuffer_10838418
+    // Buffer 148 - VkBuffer_1373
+    // Buffer 177 - VkBuffer_4271
+    // Buffer 180 - VkBuffer_4275
+
+    // i need the pre contents
+
+    // for the work, I should create one big memory alloc, and a bunch of buffers
+    // then i can map the buffers to sub-portions of the memory.
+    // Then I will use copy commands to copy from init buffer to dest 
+
     // I'll have to barrier all the resources into the right spot...
+
 }
 
 void ReadBuffer(const char *name, std::vector<uint8_t> &buf)
