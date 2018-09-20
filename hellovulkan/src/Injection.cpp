@@ -6,8 +6,9 @@
 /*
 To create:
 
-shader module
-graphics pipeline
+VkShaderModule_9511
+VkPipeline_10836480
+
 bind pipeline layout to graphics pipeline
 
 Created:
@@ -205,6 +206,8 @@ void InjectionContainer::CreateResources(VkDevice device)
     // update descriptor sets
     // only need to do this once!
     UpdateDescriptorSets();
+
+    CreateShader();
 }
 
 void InjectionContainer::BuildCommandBuffer(VkCommandBuffer commandBuffer)
@@ -221,6 +224,8 @@ void InjectionContainer::BuildCommandBuffer(VkCommandBuffer commandBuffer)
     uint32_t* pDynamicOffsets = NULL;
     vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE, VkPipelineLayout_1231, 0u, 5u, pDescriptorSets, 0u, pDynamicOffsets);
 
+    // bind shader
+    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE, VkPipeline_10836480);
 
     // shouldn't need pipeline barrier, assuming resources are in correct state!
 
@@ -5475,4 +5480,72 @@ void InjectionContainer::CreateSamplers()
         VkResult result = vkCreateSampler(m_device, &CreateInfo, NULL, &VkSampler_6244);
         assert(result == VK_SUCCESS);
     }
+}
+
+void InjectionContainer::ResetMemory()
+{
+    // I'll have to barrier all the resources into the right spot...
+}
+
+void ReadBuffer(const char *name, std::vector<uint8_t> &buf)
+{
+    FILE *f = fopen(name, "rb");
+    if (f == NULL)
+    {
+        return;
+    }
+
+    fseek(f, 0, SEEK_END);
+    uint64_t length = ftell(f);
+    buf.resize(length);
+    rewind(f);
+
+    uint64_t result = fread(buf.data(), 1, length, f);
+    fclose(f);
+    assert(result <= length);
+}
+
+void InjectionContainer::CreateShader()
+{
+    std::vector<uint8_t> shader_265;
+    ReadBuffer("shader_265", shader_265);
+
+    {
+        VkShaderModuleCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ 0,
+            /* codeSize = */ 18416u,
+            /* pCode = */ (const uint32_t*)shader_265.data(),
+        };
+        //VkResult result = shim_vkCreateShaderModule(VkDevice_5, &CreateInfo, NULL, &VkShaderModule_9511);
+        VkResult result = vkCreateShaderModule(m_device, &CreateInfo, NULL, &VkShaderModule_9511);
+        assert(result == VK_SUCCESS);
+        shader_265.clear();
+    }
+
+    //shim_vkCmdBindPipeline(VkCommandBuffer_360, VK_PIPELINE_BIND_POINT_COMPUTE, VkPipeline_10836480);
+    {
+        VkComputePipelineCreateInfo CreateInfo = {
+            /* sType = */ VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO,
+            /* pNext = */ NULL,
+            /* flags = */ VkPipelineCreateFlagBits(0),
+            { /* stage = */
+                /* sType = */ VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,
+                /* pNext = */ NULL,
+                /* flags = */ 0,
+                /* stage = */ VK_SHADER_STAGE_COMPUTE_BIT,
+                /* module = */ VkShaderModule_9511,
+                /* pName = */ "CS_Main",
+                /* pSpecializationInfo = */ NULL,
+            },
+            /* layout = */ VkPipelineLayout_1231,
+            /* basePipelineHandle = */ NULL,
+            /* basePipelineIndex = */ 0,
+        };
+        //VkResult result = shim_vkCreateComputePipelines(VkDevice_5, VkPipelineCache_957, 1, &CreateInfo, NULL, &VkPipeline_10836480);
+        VkResult result = vkCreateComputePipelines(m_device, NULL, 1, &CreateInfo, NULL, &VkPipeline_10836480);
+        assert(result == VK_SUCCESS);
+    }
+
 }

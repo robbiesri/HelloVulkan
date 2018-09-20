@@ -26,6 +26,7 @@ private:
     VkDescriptorSetLayout VkDescriptorSetLayout_1141;
     VkDescriptorSetLayout VkDescriptorSetLayout_1226;
 
+    VkShaderModule VkShaderModule_9511;
     VkPipelineLayout VkPipelineLayout_1231;
 
     // buffer memory
@@ -139,7 +140,7 @@ private:
     VkImageView VkImageView_10832000;
     VkImageView VkImageView_18651;
 
-
+    VkPipeline VkPipeline_10836480;
 
     void CreateDescriptorSetLayouts();
     void CreatePipelineLayouts();
@@ -156,6 +157,10 @@ private:
     void BindImageMemory();
     void CreateImageViews();
     void CreateSamplers();
+
+    void ResetMemory();
+
+    void CreateShader();
 
 
 };
