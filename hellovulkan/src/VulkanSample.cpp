@@ -706,6 +706,7 @@ void VulkanSample::Run(const int frameCount)
         InitializeImpl(setupCommandBuffer_);
 
         injectionContainer.CreateResources(device_);
+        injectionContainer.InitializeStaticResources(setupCommandBuffer_);
 
         vkEndCommandBuffer(setupCommandBuffer_);
 
@@ -743,6 +744,9 @@ void VulkanSample::Run(const int frameCount)
         beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
         
         vkBeginCommandBuffer(commandBuffers_[currentBackBuffer_], &beginInfo);
+
+        injectionContainer.ResetBuffers(commandBuffers_[currentBackBuffer_]);
+        injectionContainer.BuildCommandBuffer(commandBuffers_[currentBackBuffer_]);
 
         VkRenderPassBeginInfo renderPassBeginInfo = {};
         renderPassBeginInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;

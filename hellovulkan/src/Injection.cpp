@@ -230,6 +230,8 @@ void InjectionContainer::CreateResources(VkDevice device)
 
 void InjectionContainer::BuildCommandBuffer(VkCommandBuffer commandBuffer)
 {
+    //ResetBuffers(commandBuffer);
+
     // bind descriptor sets
     //vkCmdBindDescriptorSets(VkCommandBuffer_360, VK_PIPELINE_BIND_POINT_COMPUTE, VkPipelineLayout_1231, 0u, 1u, pDescriptorSets, 0u, pDynamicOffsets);
     VkDescriptorSet pDescriptorSets[5] = {
@@ -249,6 +251,18 @@ void InjectionContainer::BuildCommandBuffer(VkCommandBuffer commandBuffer)
 
     // kick off work finally!
     vkCmdDispatch(commandBuffer, 859u, 1u, 1u);
+
+    VkMemoryBarrier pMemoryBarriers[1] = {
+        { /* pMemoryBarriers = */
+            /* sType = */ VK_STRUCTURE_TYPE_MEMORY_BARRIER,
+            /* pNext = */ NULL,
+            /* srcAccessMask = */ VK_ACCESS_SHADER_WRITE_BIT,
+            /* dstAccessMask = */ VK_ACCESS_SHADER_READ_BIT,
+        },
+    };
+    VkBufferMemoryBarrier* pBufferMemoryBarriers = NULL;
+    VkImageMemoryBarrier* pImageMemoryBarriers = NULL;
+    vkCmdPipelineBarrier(commandBuffer, VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, 0, 1, pMemoryBarriers, 0, pBufferMemoryBarriers, 0, pImageMemoryBarriers);
 }
 
 void InjectionContainer::CreateDescriptorSetLayouts()
@@ -3184,13 +3198,28 @@ void InjectionContainer::AllocateMemory()
     // index should be easy
     // size...maybe not
 
+    // these are the host visible allocs
+    // VkDeviceMemory_185
+    //      VkBuffer_1136 - Constant buffers
+    // VkDeviceMemory_4228
+    //      VkBuffer_8981352
+    //          4 79: Xhlslcc_set_4_bind_79X_ClusteredInstanceCullingParams_Batches RW Buffer Buffer 559 15000 bytes Viewing bytes 0 - 15000
+    //      VkBuffer_10838418
+    //          4 80: Xhlslcc_set_4_bind_80X_ClusteredInstanceCullingParams_Instances RW Buffer Buffer 2587 638976 bytes Viewing bytes 0 - 638976
+    // VkDeviceMemory_1359
+    //      VkBuffer_1358
+    //          3 3: Xhlslcc_set_3_bind_3X_InstanceParams_instancing_instanceData TexBuffer Buffer 142 R32G32B32A32_FLOAT bytes 0 - 266338304
+
+    // 1359 is the most offensive, as Buffer 1358 is one of the primary inputs for the work
+
+
     //      buffer memory
     {
         VkMemoryAllocateInfo AllocateInfo = {
             /* sType = */ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
             /* pNext = */ NULL,
             /* allocationSize = */ 67108864u,
-            /* memoryTypeIndex = */ 1u, // WARNING
+            /* memoryTypeIndex = */ 1u, // WARNING...but this is ok, constant buffer
         };
         VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_185);
         assert(result == VK_SUCCESS);
@@ -3221,6 +3250,7 @@ void InjectionContainer::AllocateMemory()
             /* pNext = */ NULL,
             /* allocationSize = */ 67108864u,
             /* memoryTypeIndex = */ 1u, // WARNING
+            ///* memoryTypeIndex = */ 0u,
         };
         VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_4228);
         assert(result == VK_SUCCESS);
@@ -3230,7 +3260,8 @@ void InjectionContainer::AllocateMemory()
             /* sType = */ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
             /* pNext = */ NULL,
             /* allocationSize = */ 266338304u,
-            /* memoryTypeIndex = */ 1u,
+            /* memoryTypeIndex = */ 1u, // WARNING
+            ///* memoryTypeIndex = */ 0u,
         };
         VkResult result = vkAllocateMemory(m_device, &AllocateInfo, NULL, &VkDeviceMemory_1359);
         assert(result == VK_SUCCESS);
@@ -5555,10 +5586,13 @@ void LoadSourceBufferHelper(const char* binaryFileName, uint32_t expectedBufferS
 void InjectionContainer::CreateResetBuffersAndImages()
 {
     // Buffer 141 - VkBuffer_1136
+
     // Buffer 142 - VkBufferView_1360 - VkBuffer_1358
     // Image 316 - VkImageView_18651 - VkImage_18649
+    
     // Buffer 173 - VkBufferView_4258 - VkBuffer_4256
-    // Buffer 2687 - VkBuffer_10838418
+    // Buffer 559 - VkBuffer_8981352
+    // Buffer 2587 - VkBuffer_10838418
     // Buffer 148 - VkBuffer_1373
     // Buffer 177 - VkBuffer_4271
     // Buffer 180 - VkBuffer_4275
@@ -5582,6 +5616,10 @@ void InjectionContainer::CreateResetBuffersAndImages()
     LoadSourceBufferHelper("buffer173_pre_to_buffer4256.bin", VkBuffer_buffer_4256_reset_source.expectedSize,
         m_device, VkBuffer_buffer_4256_reset_source.buffer, VkBuffer_buffer_4256_reset_source.deviceMem);
 
+    VkBuffer_buffer_8981352_reset_source.expectedSize = 15000u;
+    LoadSourceBufferHelper("buffer559_pre_to_buffer8981352.bin", VkBuffer_buffer_8981352_reset_source.expectedSize,
+        m_device, VkBuffer_buffer_8981352_reset_source.buffer, VkBuffer_buffer_8981352_reset_source.deviceMem);
+
     VkBuffer_buffer_10838418_reset_source.expectedSize = 638976u;
     LoadSourceBufferHelper("buffer2587_pre_to_buffer_10838418.bin", VkBuffer_buffer_10838418_reset_source.expectedSize,
         m_device, VkBuffer_buffer_10838418_reset_source.buffer, VkBuffer_buffer_10838418_reset_source.deviceMem);
@@ -5599,137 +5637,250 @@ void InjectionContainer::CreateResetBuffersAndImages()
         m_device, VkBuffer_buffer_4275_reset_source.buffer, VkBuffer_buffer_4275_reset_source.deviceMem);
 }
 
-void InjectionContainer::InitializeConstantBuffers()
+void InjectionContainer::InitializeStaticResources(VkCommandBuffer commandBuffer)
 {
     /*
     uniform buffers
-        3 0: Xhlslcc_set_3_bind_0X_InstanceParams_cbuffer Buffer 141 12679536 - 12679856 1 Variables, 320 bytes
-        4 1 : Xhlslcc_set_4_bind_1X_ClusteredInstanceCullingParams_cbuffer Buffer 141 12765088 - 12765104 1 Variables, 16 bytes
-        4 2 : Xhlslcc_set_4_bind_2X_HZBConsts_cbuffer Buffer 141 12677600 - 12677888 1 Variables, 288 bytes
-        4 3 : Xhlslcc_set_4_bind_3X_MiscCullingConsts_cbuffer Buffer 141 12676976 - 12677600 1 Variables, 624 bytes
-    */
+    3 0: Xhlslcc_set_3_bind_0X_InstanceParams_cbuffer Buffer 141 12679536 - 12679856 1 Variables, 320 bytes
+    4 1 : Xhlslcc_set_4_bind_1X_ClusteredInstanceCullingParams_cbuffer Buffer 141 12765088 - 12765104 1 Variables, 16 bytes
+    4 2 : Xhlslcc_set_4_bind_2X_HZBConsts_cbuffer Buffer 141 12677600 - 12677888 1 Variables, 288 bytes
+    4 3 : Xhlslcc_set_4_bind_3X_MiscCullingConsts_cbuffer Buffer 141 12676976 - 12677600 1 Variables, 624 bytes
 
-        // constant buffers
-        // All part of VkBuffer_1136
-    //struct float4
-    //{
-    //    float x, y, x, w;
-    //};
-    //struct float4x4
-    //{
-    //    float4 row0;
-    //    float4 row1;
-    //    float4 row2;
-    //    float4 row3;
-    //};
-
-    //struct int4
-    //{
-    //    int32_t x, y, z, w;
-    //};
-
-    //struct InstanceParams
-    //{
-    //    float4x4 world;
-    //    float4x4 worldPrevFrame;
-    //    float4x4 worldViewProj;
-    //    float4x4 worldViewProjPrevFrame;
-
-    //    float4 dissolveFactor;
-
-    //    float LODBlendFactor;
-    //    float wetnessBias;
-    //    float alphaTestValue;
-    //    uint32_t materialTableIndex;
-
-    //    uint32_t instanceOffset;
-    //    uint32_t CameraTAADither;
-    //    uint32_t _padmania_0;
-    //    uint32_t _padmania_1;
-
-    //    int4 offsets;
-    //};
-
-    //struct ClusteredInstanceCullingParams
-    //{
-    //    uint32_t MaxClusterChunks;
-    //    uint32_t InstanceCount;
-    //    uint32_t InstanceStartIdx;
-    //    uint32_t _padmania_0;
-    //};
-
-    //struct HZBConsts
-    //{
-    //    float4 ZScaleBias;
-    //    float4x4    ViewProjectionNoTranslation;
-    //    float4     ViewTranslation;
-    //    float4 Viewport;
-    //    float4 MinMipLevel;
-    //    float4 CascadeScale[4];
-    //    float4  CascadeOffset[4];
-    //    int4 CascadeCount;
-    //    float4 HalfPixel;
-    //};
-
-    //struct MiscCullingConsts
-    //{
-    //    float4 ViewerPosition;
-    //    float4 ViewerDirection;
-    //    float4 FrustumPlanes[16];
-    //    float4 AntiFrustumPlanes[16];
-
-    //    uint32_t FrustumPlaneCount;
-    //    uint32_t AntiFrustumPlaneCount;
-    //    float MinTriangleArea;
-    //    uint32_t CullingFlags;
-
-    //    uint32_t ForceLOD;
-    //    float FOVDistanceFactor;
-    //    float GeometricObjectLODDistanceBias;
-    //    float GeometricObjectLODDistanceScale;
-
-    //    float4 LODCullingViewerPosition;
-    //    float4 VPosToUV;
-
-    //    float ProjectorShadowDimensions[2];
-    //    float ProjectorShadowFarClip;
-    //    uint32_t _padmania_0;
-    //};
-}
-
-void InjectionContainer::ResetMemory()
-{
-
-
-    /*
     input buffers
     3 3: Xhlslcc_set_3_bind_3X_InstanceParams_instancing_instanceData TexBuffer Buffer 142 R32G32B32A32_FLOAT bytes 0 - 266338304
     4 24: Xhlslcc_set_4_bind_24X_ClusteredInstanceCullingParams_HZBTexture Texture 2D Image 2D Color Attachment 316 512x256 R32_FLOAT
+    */
 
+
+    // constant buffers
+    // Buffer 141 - VkBuffer_1136
+
+    // we can just map and update the buffer for now, though in the future, we could try to make it transfer_src
+    std::vector<uint8_t> bufferBinaryData;
+    ReadBuffer("buffer141_to_buffer1136.bin", bufferBinaryData);
+
+    uint8_t *data = NULL;
+    VkResult result = vkMapMemory(m_device, VkDeviceMemory_185, 4096, 18874368u, 0, (void **)&data);
+    assert(result == VK_SUCCESS);
+
+    memcpy(data, bufferBinaryData.data(), 18874368u);
+
+    VkMappedMemoryRange memory_range = { VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE, NULL, VkDeviceMemory_185, 4096, 18874368u };
+
+    result = vkFlushMappedMemoryRanges(m_device, 1, &memory_range);
+    assert(result == VK_SUCCESS);
+
+    vkUnmapMemory(m_device, VkDeviceMemory_185);
+
+    bufferBinaryData.clear();
+
+    // source buffer
+    // Buffer 142 - VkBufferView_1360 - VkBuffer_1358
+
+    // copy into 1358!
+    VkBufferCopy region = { 0, 0, VkBuffer_buffer_1358_source.expectedSize };
+    vkCmdCopyBuffer(commandBuffer, VkBuffer_buffer_1358_source.buffer, VkBuffer_1358, 1, &region);
+
+    VkMemoryBarrier* pMemoryBarriers = NULL;
+    VkBufferMemoryBarrier pBufferMemoryBarriers[1] = {
+        { /* pBufferMemoryBarriers = */
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER,
+            /* pNext = */ NULL,
+            /* srcAccessMask = */ VK_ACCESS_TRANSFER_WRITE_BIT,
+            /* dstAccessMask = */ VK_ACCESS_SHADER_READ_BIT,
+            /* srcQueueFamilyIndex = */ VK_QUEUE_FAMILY_IGNORED,
+            /* dstQueueFamilyIndex = */ VK_QUEUE_FAMILY_IGNORED,
+            /* buffer = */ VkBuffer_1358,
+            /* offset = */ 0u,
+            /* size = */ VkBuffer_buffer_1358_source.expectedSize,
+        }
+    };
+    VkImageMemoryBarrier* pImageMemoryBarriers = NULL;
+
+    vkCmdPipelineBarrier(commandBuffer, VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT, 0, 0, pMemoryBarriers, 1, pBufferMemoryBarriers, 0, pImageMemoryBarriers);
+    
+    // source image
+    // Image 316 - VkImageView_18651 - VkImage_18649
+
+    // this is the hard one!
+    // layout transition to transfer_WRITE
+    uint32_t all_access =
+        VK_ACCESS_INDIRECT_COMMAND_READ_BIT | VK_ACCESS_INDEX_READ_BIT |
+        VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT | VK_ACCESS_UNIFORM_READ_BIT |
+        VK_ACCESS_INPUT_ATTACHMENT_READ_BIT | VK_ACCESS_SHADER_READ_BIT | VK_ACCESS_SHADER_WRITE_BIT |
+        VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT |
+        VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT | VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT |
+        VK_ACCESS_TRANSFER_READ_BIT | VK_ACCESS_TRANSFER_WRITE_BIT | VK_ACCESS_HOST_READ_BIT |
+        VK_ACCESS_HOST_WRITE_BIT;
+
+    VkImageSubresourceRange subresourceRange = { VK_IMAGE_ASPECT_COLOR_BIT, 0, 9u, 0, 1 };
+
+    VkImageMemoryBarrier imgBarrier = { VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER,
+        NULL,
+        all_access,
+        VK_ACCESS_TRANSFER_WRITE_BIT,
+        VK_IMAGE_LAYOUT_UNDEFINED,
+        VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+        VK_QUEUE_FAMILY_IGNORED,
+        VK_QUEUE_FAMILY_IGNORED,
+        VkImage_18649,
+        subresourceRange };
+    vkCmdPipelineBarrier(commandBuffer, VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
+        VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, 0, 0, NULL, 0, NULL, 1, &imgBarrier);
+
+    VkExtent3D dim =
+    { /* extent = */
+        /* width = */ 512u,
+        /* height = */ 256u,
+        /* depth = */ 1u,
+    };
+
+    VkBufferImageCopy imgRegion = {
+        0, 
+        dim.width, dim.height,
+        { VK_IMAGE_ASPECT_COLOR_BIT, 0, 0, 1 },
+        { 0, 0, 0 },  dim
+    };
+    vkCmdCopyBufferToImage(commandBuffer, VkBuffer_image_18649_source.buffer, VkImage_18649, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &imgRegion);
+
+    imgBarrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+    imgBarrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+    imgBarrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+    imgBarrier.newLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+
+    vkCmdPipelineBarrier(commandBuffer, VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
+        VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, 0, 0, NULL, 0, NULL, 1, &imgBarrier);
+
+    // VALIDATION SURVIVES
+ 
+}
+
+//void InjectionContainer::InitialTransitionBuffers(VkCommandBuffer commandBuffer)
+//{
+//
+//    // do we need an initial barrier before doing the initial transfer?
+//}
+
+
+void InjectionContainer::ResetBuffers(VkCommandBuffer commandBuffer)
+{
+    /*
     RW buffers
     4 69: Xhlslcc_set_4_bind_69X_ClusteredInstanceCullingParams_BatchRenderIndirect RW TexBuffer Buffer 173 R32_UINT bytes 0 - 12779520
+    4 79: Xhlslcc_set_4_bind_79X_ClusteredInstanceCullingParams_Batches RW Buffer Buffer 559 15000 bytes Viewing bytes 0 - 15000
     4 80: Xhlslcc_set_4_bind_80X_ClusteredInstanceCullingParams_Instances RW Buffer Buffer 2587 638976 bytes Viewing bytes 0 - 638976
     4 81: Xhlslcc_set_4_bind_81X_ClusteredInstanceCullingParams_GPUPrimitives RW Buffer Buffer 148 16777208 bytes Viewing bytes 0 - 16777208
     4 86: Xhlslcc_set_4_bind_86X_ClusteredInstanceCullingParams_ChunkCounter RW Buffer Buffer 177 16 bytes Viewing bytes 0 - 16
     4 87: Xhlslcc_set_4_bind_87X_ClusteredInstanceCullingParams_ChunkCullBuffer RW Buffer Buffer 180 1440000 bytes Viewing bytes 0 - 1440000
     */
 
-    // I need a mapping from the data buffers I got from RDC to my buffers
-    // Buffer 142 - VkBufferView_1360 - VkBuffer_1358
-    // Image 316 - VkImageView_18651
-    // Buffer 173 - VkBufferView_4258
-    // Buffer 2687 - VkBuffer_10838418
+    // Buffer 173 - VkBufferView_4258 - VkBuffer_4256
+    // Buffer 559 - VkBuffer_8981352
+    // Buffer 2587 - VkBuffer_10838418
     // Buffer 148 - VkBuffer_1373
     // Buffer 177 - VkBuffer_4271
     // Buffer 180 - VkBuffer_4275
 
-    // i need the pre contents
+    VkMemoryBarrier* pMemoryBarriers = NULL;
+    VkBufferMemoryBarrier pBufferMemoryBarriers[6] = {
+        { /* pBufferMemoryBarriers = */
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER,
+            /* pNext = */ NULL,
+            /* srcAccessMask = */ VK_ACCESS_SHADER_READ_BIT | VK_ACCESS_SHADER_WRITE_BIT,
+            /* dstAccessMask = */ VK_ACCESS_TRANSFER_WRITE_BIT,
+            /* srcQueueFamilyIndex = */ VK_QUEUE_FAMILY_IGNORED,
+            /* dstQueueFamilyIndex = */ VK_QUEUE_FAMILY_IGNORED,
+            /* buffer = */ VkBuffer_4256,
+            /* offset = */ 0u,
+            /* size = */ VkBuffer_buffer_4256_reset_source.expectedSize,
+        },
+        { /* pBufferMemoryBarriers = */
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER,
+            /* pNext = */ NULL,
+            /* srcAccessMask = */ VK_ACCESS_SHADER_READ_BIT | VK_ACCESS_SHADER_WRITE_BIT,
+            /* dstAccessMask = */ VK_ACCESS_TRANSFER_WRITE_BIT,
+            /* srcQueueFamilyIndex = */ VK_QUEUE_FAMILY_IGNORED,
+            /* dstQueueFamilyIndex = */ VK_QUEUE_FAMILY_IGNORED,
+            /* buffer = */ VkBuffer_8981352,
+            /* offset = */ 0u,
+            /* size = */ VkBuffer_buffer_8981352_reset_source.expectedSize,
+        },
+        { /* pBufferMemoryBarriers = */
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER,
+            /* pNext = */ NULL,
+            /* srcAccessMask = */ VK_ACCESS_SHADER_READ_BIT | VK_ACCESS_SHADER_WRITE_BIT,
+            /* dstAccessMask = */ VK_ACCESS_TRANSFER_WRITE_BIT,
+            /* srcQueueFamilyIndex = */ VK_QUEUE_FAMILY_IGNORED,
+            /* dstQueueFamilyIndex = */ VK_QUEUE_FAMILY_IGNORED,
+            /* buffer = */ VkBuffer_10838418,
+            /* offset = */ 0u,
+            /* size = */ VkBuffer_buffer_10838418_reset_source.expectedSize,
+        },
+        { /* pBufferMemoryBarriers = */
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER,
+            /* pNext = */ NULL,
+            /* srcAccessMask = */ VK_ACCESS_SHADER_READ_BIT | VK_ACCESS_SHADER_WRITE_BIT,
+            /* dstAccessMask = */ VK_ACCESS_TRANSFER_WRITE_BIT,
+            /* srcQueueFamilyIndex = */ VK_QUEUE_FAMILY_IGNORED,
+            /* dstQueueFamilyIndex = */ VK_QUEUE_FAMILY_IGNORED,
+            /* buffer = */ VkBuffer_1373,
+            /* offset = */ 0u,
+            /* size = */ VkBuffer_buffer_1373_reset_source.expectedSize,
+        },
+        { /* pBufferMemoryBarriers = */
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER,
+            /* pNext = */ NULL,
+            /* srcAccessMask = */ VK_ACCESS_SHADER_READ_BIT | VK_ACCESS_SHADER_WRITE_BIT,
+            /* dstAccessMask = */ VK_ACCESS_TRANSFER_WRITE_BIT,
+            /* srcQueueFamilyIndex = */ VK_QUEUE_FAMILY_IGNORED,
+            /* dstQueueFamilyIndex = */ VK_QUEUE_FAMILY_IGNORED,
+            /* buffer = */ VkBuffer_4271,
+            /* offset = */ 0u,
+            /* size = */ VkBuffer_buffer_4271_reset_source.expectedSize,
+        },
+        { /* pBufferMemoryBarriers = */
+            /* sType = */ VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER,
+            /* pNext = */ NULL,
+            /* srcAccessMask = */ VK_ACCESS_SHADER_READ_BIT | VK_ACCESS_SHADER_WRITE_BIT,
+            /* dstAccessMask = */ VK_ACCESS_TRANSFER_WRITE_BIT,
+            /* srcQueueFamilyIndex = */ VK_QUEUE_FAMILY_IGNORED,
+            /* dstQueueFamilyIndex = */ VK_QUEUE_FAMILY_IGNORED,
+            /* buffer = */ VkBuffer_4275,
+            /* offset = */ 0u,
+            /* size = */ VkBuffer_buffer_4275_reset_source.expectedSize,
+        },
+    };
+    VkImageMemoryBarrier* pImageMemoryBarriers = NULL;
+    vkCmdPipelineBarrier(commandBuffer, VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT, 0, 0, pMemoryBarriers, 6, pBufferMemoryBarriers, 0, pImageMemoryBarriers);
 
-    // for the work, I should create one big memory alloc, and a bunch of buffers
-    // then i can map the buffers to sub-portions of the memory.
-    // Then I will use copy commands to copy from init buffer to dest 
+    // reset images now!
+    VkBufferCopy region = { 0, 0, VkBuffer_buffer_4256_reset_source.expectedSize };
+    vkCmdCopyBuffer(commandBuffer, VkBuffer_buffer_4256_reset_source.buffer, VkBuffer_4256, 1, &region);
 
-    // I'll have to barrier all the resources into the right spot...
+    region.size = VkBuffer_buffer_8981352_reset_source.expectedSize;
+    vkCmdCopyBuffer(commandBuffer, VkBuffer_buffer_8981352_reset_source.buffer, VkBuffer_8981352, 1, &region);
+
+    region.size = VkBuffer_buffer_10838418_reset_source.expectedSize;
+    vkCmdCopyBuffer(commandBuffer, VkBuffer_buffer_10838418_reset_source.buffer, VkBuffer_10838418, 1, &region);
+
+    region.size = VkBuffer_buffer_1373_reset_source.expectedSize;
+    vkCmdCopyBuffer(commandBuffer, VkBuffer_buffer_1373_reset_source.buffer, VkBuffer_1373, 1, &region);
+
+    region.size = VkBuffer_buffer_4271_reset_source.expectedSize;
+    vkCmdCopyBuffer(commandBuffer, VkBuffer_buffer_4271_reset_source.buffer, VkBuffer_4271, 1, &region);
+
+    region.size = VkBuffer_buffer_4275_reset_source.expectedSize;
+    vkCmdCopyBuffer(commandBuffer, VkBuffer_buffer_4275_reset_source.buffer, VkBuffer_4275, 1, &region);
+
+
+    // now barrier for shader access
+    for (uint32_t idx = 0; idx < 6; idx++)
+    {
+        pBufferMemoryBarriers[idx].srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+        pBufferMemoryBarriers[idx].dstAccessMask = VK_ACCESS_SHADER_READ_BIT | VK_ACCESS_SHADER_WRITE_BIT;
+    }
+    vkCmdPipelineBarrier(commandBuffer, VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT, 0, 0, pMemoryBarriers, 6, pBufferMemoryBarriers, 0, pImageMemoryBarriers);
+
 
 }
 
@@ -5777,3 +5928,91 @@ void InjectionContainer::CreateShader()
     }
 
 }
+
+
+// constant buffers
+// All part of VkBuffer_1136
+//struct float4
+//{
+//    float x, y, x, w;
+//};
+//struct float4x4
+//{
+//    float4 row0;
+//    float4 row1;
+//    float4 row2;
+//    float4 row3;
+//};
+
+//struct int4
+//{
+//    int32_t x, y, z, w;
+//};
+
+//struct InstanceParams
+//{
+//    float4x4 world;
+//    float4x4 worldPrevFrame;
+//    float4x4 worldViewProj;
+//    float4x4 worldViewProjPrevFrame;
+
+//    float4 dissolveFactor;
+
+//    float LODBlendFactor;
+//    float wetnessBias;
+//    float alphaTestValue;
+//    uint32_t materialTableIndex;
+
+//    uint32_t instanceOffset;
+//    uint32_t CameraTAADither;
+//    uint32_t _padmania_0;
+//    uint32_t _padmania_1;
+
+//    int4 offsets;
+//};
+
+//struct ClusteredInstanceCullingParams
+//{
+//    uint32_t MaxClusterChunks;
+//    uint32_t InstanceCount;
+//    uint32_t InstanceStartIdx;
+//    uint32_t _padmania_0;
+//};
+
+//struct HZBConsts
+//{
+//    float4 ZScaleBias;
+//    float4x4    ViewProjectionNoTranslation;
+//    float4     ViewTranslation;
+//    float4 Viewport;
+//    float4 MinMipLevel;
+//    float4 CascadeScale[4];
+//    float4  CascadeOffset[4];
+//    int4 CascadeCount;
+//    float4 HalfPixel;
+//};
+
+//struct MiscCullingConsts
+//{
+//    float4 ViewerPosition;
+//    float4 ViewerDirection;
+//    float4 FrustumPlanes[16];
+//    float4 AntiFrustumPlanes[16];
+
+//    uint32_t FrustumPlaneCount;
+//    uint32_t AntiFrustumPlaneCount;
+//    float MinTriangleArea;
+//    uint32_t CullingFlags;
+
+//    uint32_t ForceLOD;
+//    float FOVDistanceFactor;
+//    float GeometricObjectLODDistanceBias;
+//    float GeometricObjectLODDistanceScale;
+
+//    float4 LODCullingViewerPosition;
+//    float4 VPosToUV;
+
+//    float ProjectorShadowDimensions[2];
+//    float ProjectorShadowFarClip;
+//    uint32_t _padmania_0;
+//};

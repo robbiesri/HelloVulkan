@@ -6,6 +6,10 @@ class InjectionContainer
 {
 public:
     void CreateResources(VkDevice device);
+    void InitializeStaticResources(VkCommandBuffer commandBuffer);
+    //void InitialTransitionBuffers(VkCommandBuffer commandBuffer);
+
+    void ResetBuffers(VkCommandBuffer commandBuffer);
     void BuildCommandBuffer(VkCommandBuffer commandBuffer);
 
 private:
@@ -156,6 +160,7 @@ private:
     SourceBufferInfo VkBuffer_image_18649_source;
 
     SourceBufferInfo VkBuffer_buffer_4256_reset_source; // RW buffers
+    SourceBufferInfo VkBuffer_buffer_8981352_reset_source;
     SourceBufferInfo VkBuffer_buffer_10838418_reset_source;
     SourceBufferInfo VkBuffer_buffer_1373_reset_source;
     SourceBufferInfo VkBuffer_buffer_4271_reset_source;
@@ -179,9 +184,7 @@ private:
 
     void CreateResetBuffersAndImages();
 
-    void InitializeConstantBuffers();
-
-    void ResetMemory();
+    
 
     void CreateShader();
 
